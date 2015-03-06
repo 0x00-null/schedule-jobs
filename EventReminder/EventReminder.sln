@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventReminder", "EventReminder\EventReminder.csproj", "{607CD5BA-9C61-41F3-A3FE-DD08643147B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventReminder.Testing", "EventReminder.Testing\EventReminder.Testing.csproj", "{6251CA4E-7F65-470B-B4EB-3574CB1567D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{607CD5BA-9C61-41F3-A3FE-DD08643147B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{607CD5BA-9C61-41F3-A3FE-DD08643147B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{607CD5BA-9C61-41F3-A3FE-DD08643147B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{607CD5BA-9C61-41F3-A3FE-DD08643147B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6251CA4E-7F65-470B-B4EB-3574CB1567D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6251CA4E-7F65-470B-B4EB-3574CB1567D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6251CA4E-7F65-470B-B4EB-3574CB1567D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6251CA4E-7F65-470B-B4EB-3574CB1567D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

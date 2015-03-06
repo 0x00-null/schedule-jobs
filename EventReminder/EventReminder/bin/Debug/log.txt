@@ -1,0 +1,31 @@
+2015-03-03 10:31:41,765 [8] DEBUG EventReminder.Program [(null)] - Debug Hi
+2015-03-03 10:31:41,797 [8] INFO  EventReminder.Program [(null)] - Info logging
+2015-03-03 10:35:36,051 [8] DEBUG EventReminder.Program [(null)] - Debug Hi
+2015-03-03 10:35:36,082 [8] INFO  EventReminder.Program [(null)] - Info logging
+2015-03-03 10:39:12,054 [8] INFO  EventReminder.Program [(null)] - Info logging
+2015-03-03 10:40:51,877 [8] INFO  EventReminder.Program [(null)] - Info logging
+2015-03-03 10:58:58,950 [9] INFO  EventReminder.Program [(null)] - No event reminders to send today.
+2015-03-03 11:00:31,794 [10] ERROR EventReminder.Models.Contact [(null)] - System.IndexOutOfRangeException: Nickname
+   at System.Data.ProviderBase.FieldNameLookup.GetOrdinal(String fieldName)
+   at System.Data.SqlClient.SqlDataReader.GetOrdinal(String name)
+   at EventReminder.Models.Contact.Get(Int32 contactId, String connStr) in c:\projects\crossroads\EventReminder\EventReminder\Models\Contact.cs:line 40
+2015-03-04 15:48:24,429 [9] ERROR EventReminder.Program [(null)] - System.ServiceModel.FaultException`1[System.ServiceModel.ExceptionDetail]: User is not authorized to access page data. (Fault Detail is equal to An ExceptionDetail, likely created by IncludeExceptionDetailInFaults=true, whose value is:
+System.InvalidOperationException: User is not authorized to access page data.
+   at Platform.Description.Metadata.GetPageColumns(Int32 pageId, User user, PageAccessLevel requiredLevel, Boolean throwIfUnauthorized, PageDescription& page, Boolean visibleOnly)
+   at Platform.Data.DataManager.SelectPage(Int32 pageId, Int32 recordId, Boolean quickAdd)
+   at SyncInvokeGetPageRecord(Object , Object[] , Object[] )
+   at System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   at System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage31(MessageRpc& rpc)
+   at System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)).
+2015-03-04 15:50:25,562 [9] ERROR EventReminder.Program [(null)] - System.ServiceModel.FaultException`1[System.ServiceModel.ExceptionDetail]: User is not authorized to access page data. (Fault Detail is equal to An ExceptionDetail, likely created by IncludeExceptionDetailInFaults=true, whose value is:
+System.InvalidOperationException: User is not authorized to access page data.
+   at Platform.Description.Metadata.GetPageColumns(Int32 pageId, User user, PageAccessLevel requiredLevel, Boolean throwIfUnauthorized, PageDescription& page, Boolean visibleOnly)
+   at Platform.Data.DataManager.SelectPage(Int32 pageId, Int32 recordId, Boolean quickAdd)
+   at SyncInvokeGetPageRecord(Object , Object[] , Object[] )
+   at System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]& outputs)
+   at System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc& rpc)
+   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc& rpc)
+   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage31(MessageRpc& rpc)
+   at System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)).

@@ -1,0 +1,1586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://www.thinkministry.com/dataplatform/2012/10/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PlatformService" targetNamespace="http://www.thinkministry.com/dataplatform/2012/10/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_PlatformService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.thinkministry.com/dataplatform/2012/10/Imports">
+      <xsd:import schemaLocation="https://my.crossroads.net/ministryplatformapi/PlatformService.svc?xsd=xsd0" namespace="http://www.thinkministry.com/dataplatform/2012/10/" />
+      <xsd:import schemaLocation="https://my.crossroads.net/ministryplatformapi/PlatformService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://my.crossroads.net/ministryplatformapi/PlatformService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://my.crossroads.net/ministryplatformapi/PlatformService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="PlatformService_CreatePageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreatePageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdatePageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdatePageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeletePageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeletePageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateSubpageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSubpageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateSubpageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSubpageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateSubpageRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSubpageRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateSubpageRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSubpageRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateSubpageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSubpageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateSubpageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSubpageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteSubpageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSubpageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteSubpageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSubpageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateSelectionRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSelectionRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateSelectionRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSelectionRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteSelectionRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSelectionRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteSelectionRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSelectionRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CopyPageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:CopyPageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CopyPageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CopyPageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageLookupRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageLookupRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageLookupRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageLookupRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageLookupRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageLookupRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageLookupRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageLookupRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageCalendarRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageCalendarRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageCalendarRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageCalendarRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageViewRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageViewRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageViewRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageViewRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageViewCalendarRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageViewCalendarRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageViewCalendarRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageViewCalendarRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageRecord_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageRecord" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageRecord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageCalendarRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageCalendarRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageCalendarRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageCalendarRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageViewRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageViewRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageViewRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageViewRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageViewCalendarRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageViewCalendarRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageViewCalendarRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageViewCalendarRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSelectionRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSelectionRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSelectionCalendarRecords_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionCalendarRecords" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSelectionCalendarRecords_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionCalendarRecordsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetQuickAddPages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickAddPages" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetQuickAddPages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickAddPagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetQuickAddSubpages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickAddSubpages" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetQuickAddSubpages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetQuickAddSubpagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetBookmarks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookmarks" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetBookmarks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookmarksResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageSections_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageSections" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageSections_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageSectionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPage" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageBySystemName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageBySystemName" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageBySystemName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageBySystemNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpage_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpage" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageBySystemName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageBySystemName" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageBySystemName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageBySystemNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateSelectionName_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSelectionName" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateSelectionName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSelectionNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_ClearSelections_InputMessage">
+    <wsdl:part name="parameters" element="tns:ClearSelections" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_ClearSelections_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ClearSelectionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddToSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddToSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddToSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddToSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_MoveToSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoveToSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_MoveToSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoveToSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddToPageSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddToPageSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddToPageSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddToPageSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_TransferToPageSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:TransferToPageSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_TransferToPageSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TransferToPageSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddToSubpageSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddToSubpageSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddToSubpageSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddToSubpageSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveFromSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveFromSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveFromPageSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromPageSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveFromPageSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromPageSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveFromSubpageSelection_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromSubpageSelection" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveFromSubpageSelection_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveFromSubpageSelectionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageHistory" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageHistory" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetSubpageHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSubpageHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFile" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CopyFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:CopyFile" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CopyFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CopyFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFile" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_SetDefaultImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDefaultImage" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_SetDefaultImage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDefaultImageResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFile" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFileDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileDescription" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFileDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFileDescriptionByUniqueId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileDescriptionByUniqueId" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFileDescriptionByUniqueId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileDescriptionByUniqueIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFileDescriptions_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileDescriptions" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFileDescriptions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileDescriptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFile" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetContactMergeFields_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactMergeFields" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetContactMergeFields_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContactMergeFieldsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunicationSnippets_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunicationSnippets" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunicationSnippets_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunicationSnippetsResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunicationSnippet_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunicationSnippet" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunicationSnippet_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunicationSnippetResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunicationTemplates_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunicationTemplates" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunicationTemplates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunicationTemplatesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunication_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunication" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCommunication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCommunicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateOrUpdateCommunication_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateCommunication" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateOrUpdateCommunication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateCommunicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteCommunication_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCommunication" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_DeleteCommunication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCommunicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_ValidateCommunication_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateCommunication" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_ValidateCommunication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateCommunicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_PreviewCommunication_InputMessage">
+    <wsdl:part name="parameters" element="tns:PreviewCommunication" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_PreviewCommunication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PreviewCommunicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RenderCommunication_InputMessage">
+    <wsdl:part name="parameters" element="tns:RenderCommunication" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RenderCommunication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RenderCommunicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTask" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageRecordTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageRecordTasks" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetPageRecordTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageRecordTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetUserTaskCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserTaskCount" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetUserTaskCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserTaskCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTask" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTask" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CompleteTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompleteTask" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CompleteTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompleteTaskResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CompleteTasks_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompleteTasks" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CompleteTasks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompleteTasksResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetRolePages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRolePages" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetRolePages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRolePagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateOrUpdateRolePages_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateRolePages" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_CreateOrUpdateRolePages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateOrUpdateRolePagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddSelectionSecurity_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSelectionSecurity" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddSelectionSecurity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddSelectionSecurityResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveSelectionSecurity_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSelectionSecurity" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemoveSelectionSecurity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveSelectionSecurityResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddPageRecordSecurity_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPageRecordSecurity" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_AddPageRecordSecurity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPageRecordSecurityResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemovePageRecordSecurity_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemovePageRecordSecurity" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_RemovePageRecordSecurity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemovePageRecordSecurityResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCurrentUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_GetCurrentUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateCurrentUserInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCurrentUserInfo" />
+  </wsdl:message>
+  <wsdl:message name="PlatformService_UpdateCurrentUserInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCurrentUserInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="PlatformService">
+    <wsdl:operation name="CreatePageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreatePageRecord" message="tns:PlatformService_CreatePageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreatePageRecordResponse" message="tns:PlatformService_CreatePageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdatePageRecord" message="tns:PlatformService_UpdatePageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdatePageRecordResponse" message="tns:PlatformService_UpdatePageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeletePageRecord" message="tns:PlatformService_DeletePageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeletePageRecordResponse" message="tns:PlatformService_DeletePageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSubpageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSubpageRecord" message="tns:PlatformService_CreateSubpageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSubpageRecordResponse" message="tns:PlatformService_CreateSubpageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSubpageRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSubpageRecords" message="tns:PlatformService_CreateSubpageRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSubpageRecordsResponse" message="tns:PlatformService_CreateSubpageRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSubpageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSubpageRecord" message="tns:PlatformService_UpdateSubpageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSubpageRecordResponse" message="tns:PlatformService_UpdateSubpageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSubpageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSubpageRecord" message="tns:PlatformService_DeleteSubpageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSubpageRecordResponse" message="tns:PlatformService_DeleteSubpageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSelectionRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSelectionRecords" message="tns:PlatformService_UpdateSelectionRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSelectionRecordsResponse" message="tns:PlatformService_UpdateSelectionRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSelectionRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSelectionRecords" message="tns:PlatformService_DeleteSelectionRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSelectionRecordsResponse" message="tns:PlatformService_DeleteSelectionRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyPageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CopyPageRecord" message="tns:PlatformService_CopyPageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CopyPageRecordResponse" message="tns:PlatformService_CopyPageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecord" message="tns:PlatformService_GetPageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecordResponse" message="tns:PlatformService_GetPageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageLookupRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageLookupRecords" message="tns:PlatformService_GetPageLookupRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageLookupRecordsResponse" message="tns:PlatformService_GetPageLookupRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageLookupRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageLookupRecords" message="tns:PlatformService_GetSubpageLookupRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageLookupRecordsResponse" message="tns:PlatformService_GetSubpageLookupRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecords" message="tns:PlatformService_GetPageRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecordsResponse" message="tns:PlatformService_GetPageRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageCalendarRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageCalendarRecords" message="tns:PlatformService_GetPageCalendarRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageCalendarRecordsResponse" message="tns:PlatformService_GetPageCalendarRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageViewRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageViewRecords" message="tns:PlatformService_GetPageViewRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageViewRecordsResponse" message="tns:PlatformService_GetPageViewRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageViewCalendarRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageViewCalendarRecords" message="tns:PlatformService_GetPageViewCalendarRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageViewCalendarRecordsResponse" message="tns:PlatformService_GetPageViewCalendarRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageRecord">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageRecord" message="tns:PlatformService_GetSubpageRecord_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageRecordResponse" message="tns:PlatformService_GetSubpageRecord_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageRecords" message="tns:PlatformService_GetSubpageRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageRecordsResponse" message="tns:PlatformService_GetSubpageRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageCalendarRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageCalendarRecords" message="tns:PlatformService_GetSubpageCalendarRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageCalendarRecordsResponse" message="tns:PlatformService_GetSubpageCalendarRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageViewRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageViewRecords" message="tns:PlatformService_GetSubpageViewRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageViewRecordsResponse" message="tns:PlatformService_GetSubpageViewRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageViewCalendarRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageViewCalendarRecords" message="tns:PlatformService_GetSubpageViewCalendarRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageViewCalendarRecordsResponse" message="tns:PlatformService_GetSubpageViewCalendarRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectionRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelectionRecords" message="tns:PlatformService_GetSelectionRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelectionRecordsResponse" message="tns:PlatformService_GetSelectionRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectionCalendarRecords">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelectionCalendarRecords" message="tns:PlatformService_GetSelectionCalendarRecords_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelectionCalendarRecordsResponse" message="tns:PlatformService_GetSelectionCalendarRecords_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickAddPages">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetQuickAddPages" message="tns:PlatformService_GetQuickAddPages_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetQuickAddPagesResponse" message="tns:PlatformService_GetQuickAddPages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickAddSubpages">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetQuickAddSubpages" message="tns:PlatformService_GetQuickAddSubpages_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetQuickAddSubpagesResponse" message="tns:PlatformService_GetQuickAddSubpages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookmarks">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetBookmarks" message="tns:PlatformService_GetBookmarks_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetBookmarksResponse" message="tns:PlatformService_GetBookmarks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageSections">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageSections" message="tns:PlatformService_GetPageSections_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageSectionsResponse" message="tns:PlatformService_GetPageSections_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPage">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPage" message="tns:PlatformService_GetPage_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageResponse" message="tns:PlatformService_GetPage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageBySystemName">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageBySystemName" message="tns:PlatformService_GetPageBySystemName_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageBySystemNameResponse" message="tns:PlatformService_GetPageBySystemName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpage">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpage" message="tns:PlatformService_GetSubpage_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageResponse" message="tns:PlatformService_GetSubpage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageBySystemName">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageBySystemName" message="tns:PlatformService_GetSubpageBySystemName_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageBySystemNameResponse" message="tns:PlatformService_GetSubpageBySystemName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSelection" message="tns:PlatformService_CreateSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSelectionResponse" message="tns:PlatformService_CreateSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSelectionName">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSelectionName" message="tns:PlatformService_UpdateSelectionName_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSelectionNameResponse" message="tns:PlatformService_UpdateSelectionName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSelection" message="tns:PlatformService_DeleteSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSelectionResponse" message="tns:PlatformService_DeleteSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelection" message="tns:PlatformService_GetSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelectionResponse" message="tns:PlatformService_GetSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ClearSelections">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/ClearSelections" message="tns:PlatformService_ClearSelections_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/ClearSelectionsResponse" message="tns:PlatformService_ClearSelections_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToSelection" message="tns:PlatformService_AddToSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToSelectionResponse" message="tns:PlatformService_AddToSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveToSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/MoveToSelection" message="tns:PlatformService_MoveToSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/MoveToSelectionResponse" message="tns:PlatformService_MoveToSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToPageSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToPageSelection" message="tns:PlatformService_AddToPageSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToPageSelectionResponse" message="tns:PlatformService_AddToPageSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TransferToPageSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/TransferToPageSelection" message="tns:PlatformService_TransferToPageSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/TransferToPageSelectionResponse" message="tns:PlatformService_TransferToPageSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToSubpageSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToSubpageSelection" message="tns:PlatformService_AddToSubpageSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToSubpageSelectionResponse" message="tns:PlatformService_AddToSubpageSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromSelection" message="tns:PlatformService_RemoveFromSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromSelectionResponse" message="tns:PlatformService_RemoveFromSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromPageSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromPageSelection" message="tns:PlatformService_RemoveFromPageSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromPageSelectionResponse" message="tns:PlatformService_RemoveFromPageSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromSubpageSelection">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromSubpageSelection" message="tns:PlatformService_RemoveFromSubpageSelection_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromSubpageSelectionResponse" message="tns:PlatformService_RemoveFromSubpageSelection_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageHistory">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageHistory" message="tns:PlatformService_GetPageHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageHistoryResponse" message="tns:PlatformService_GetPageHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageHistory">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageHistory" message="tns:PlatformService_GetSubpageHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageHistoryResponse" message="tns:PlatformService_GetSubpageHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFile">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateFile" message="tns:PlatformService_CreateFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateFileResponse" message="tns:PlatformService_CreateFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyFile">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CopyFile" message="tns:PlatformService_CopyFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CopyFileResponse" message="tns:PlatformService_CopyFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFile">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateFile" message="tns:PlatformService_UpdateFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateFileResponse" message="tns:PlatformService_UpdateFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultImage">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/SetDefaultImage" message="tns:PlatformService_SetDefaultImage_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/SetDefaultImageResponse" message="tns:PlatformService_SetDefaultImage_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteFile" message="tns:PlatformService_DeleteFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteFileResponse" message="tns:PlatformService_DeleteFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileDescription">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescription" message="tns:PlatformService_GetFileDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescriptionResponse" message="tns:PlatformService_GetFileDescription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileDescriptionByUniqueId">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescriptionByUniqueId" message="tns:PlatformService_GetFileDescriptionByUniqueId_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescriptionByUniqueIdResponse" message="tns:PlatformService_GetFileDescriptionByUniqueId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFileDescriptions">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescriptions" message="tns:PlatformService_GetFileDescriptions_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescriptionsResponse" message="tns:PlatformService_GetFileDescriptions_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFile">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFile" message="tns:PlatformService_GetFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileResponse" message="tns:PlatformService_GetFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContactMergeFields">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetContactMergeFields" message="tns:PlatformService_GetContactMergeFields_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetContactMergeFieldsResponse" message="tns:PlatformService_GetContactMergeFields_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunicationSnippets">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationSnippets" message="tns:PlatformService_GetCommunicationSnippets_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationSnippetsResponse" message="tns:PlatformService_GetCommunicationSnippets_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunicationSnippet">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationSnippet" message="tns:PlatformService_GetCommunicationSnippet_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationSnippetResponse" message="tns:PlatformService_GetCommunicationSnippet_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunicationTemplates">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationTemplates" message="tns:PlatformService_GetCommunicationTemplates_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationTemplatesResponse" message="tns:PlatformService_GetCommunicationTemplates_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunication">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunication" message="tns:PlatformService_GetCommunication_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationResponse" message="tns:PlatformService_GetCommunication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrUpdateCommunication">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateOrUpdateCommunication" message="tns:PlatformService_CreateOrUpdateCommunication_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateOrUpdateCommunicationResponse" message="tns:PlatformService_CreateOrUpdateCommunication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCommunication">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteCommunication" message="tns:PlatformService_DeleteCommunication_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteCommunicationResponse" message="tns:PlatformService_DeleteCommunication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateCommunication">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/ValidateCommunication" message="tns:PlatformService_ValidateCommunication_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/ValidateCommunicationResponse" message="tns:PlatformService_ValidateCommunication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PreviewCommunication">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/PreviewCommunication" message="tns:PlatformService_PreviewCommunication_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/PreviewCommunicationResponse" message="tns:PlatformService_PreviewCommunication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RenderCommunication">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RenderCommunication" message="tns:PlatformService_RenderCommunication_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RenderCommunicationResponse" message="tns:PlatformService_RenderCommunication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetTask" message="tns:PlatformService_GetTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetTaskResponse" message="tns:PlatformService_GetTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageRecordTasks">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecordTasks" message="tns:PlatformService_GetPageRecordTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecordTasksResponse" message="tns:PlatformService_GetPageRecordTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserTaskCount">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetUserTaskCount" message="tns:PlatformService_GetUserTaskCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetUserTaskCountResponse" message="tns:PlatformService_GetUserTaskCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTask">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateTask" message="tns:PlatformService_CreateTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateTaskResponse" message="tns:PlatformService_CreateTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTask">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateTask" message="tns:PlatformService_UpdateTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateTaskResponse" message="tns:PlatformService_UpdateTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CompleteTask">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CompleteTask" message="tns:PlatformService_CompleteTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CompleteTaskResponse" message="tns:PlatformService_CompleteTask_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CompleteTasks">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CompleteTasks" message="tns:PlatformService_CompleteTasks_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CompleteTasksResponse" message="tns:PlatformService_CompleteTasks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePages">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetRolePages" message="tns:PlatformService_GetRolePages_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetRolePagesResponse" message="tns:PlatformService_GetRolePages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrUpdateRolePages">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateOrUpdateRolePages" message="tns:PlatformService_CreateOrUpdateRolePages_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateOrUpdateRolePagesResponse" message="tns:PlatformService_CreateOrUpdateRolePages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSelectionSecurity">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddSelectionSecurity" message="tns:PlatformService_AddSelectionSecurity_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddSelectionSecurityResponse" message="tns:PlatformService_AddSelectionSecurity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSelectionSecurity">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveSelectionSecurity" message="tns:PlatformService_RemoveSelectionSecurity_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveSelectionSecurityResponse" message="tns:PlatformService_RemoveSelectionSecurity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPageRecordSecurity">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddPageRecordSecurity" message="tns:PlatformService_AddPageRecordSecurity_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddPageRecordSecurityResponse" message="tns:PlatformService_AddPageRecordSecurity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemovePageRecordSecurity">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemovePageRecordSecurity" message="tns:PlatformService_RemovePageRecordSecurity_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemovePageRecordSecurityResponse" message="tns:PlatformService_RemovePageRecordSecurity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserInfo">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCurrentUserInfo" message="tns:PlatformService_GetCurrentUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCurrentUserInfoResponse" message="tns:PlatformService_GetCurrentUserInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCurrentUserInfo">
+      <wsdl:input wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateCurrentUserInfo" message="tns:PlatformService_UpdateCurrentUserInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateCurrentUserInfoResponse" message="tns:PlatformService_UpdateCurrentUserInfo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_PlatformService" type="tns:PlatformService">
+    <wsp:PolicyReference URI="#BasicHttpBinding_PlatformService_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreatePageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreatePageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdatePageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeletePageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSubpageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSubpageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSubpageRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSubpageRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSubpageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSubpageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSubpageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSubpageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSelectionRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSelectionRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSelectionRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSelectionRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyPageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CopyPageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageLookupRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageLookupRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageLookupRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageLookupRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageCalendarRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageCalendarRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageViewRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageViewRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageViewCalendarRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageViewCalendarRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageRecord">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageCalendarRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageCalendarRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageViewRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageViewRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageViewCalendarRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageViewCalendarRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectionRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelectionRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelectionCalendarRecords">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelectionCalendarRecords" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickAddPages">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetQuickAddPages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQuickAddSubpages">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetQuickAddSubpages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookmarks">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetBookmarks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageSections">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageSections" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPage">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageBySystemName">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageBySystemName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpage">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageBySystemName">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageBySystemName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSelectionName">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateSelectionName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ClearSelections">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/ClearSelections" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveToSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/MoveToSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToPageSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToPageSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TransferToPageSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/TransferToPageSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToSubpageSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddToSubpageSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromPageSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromPageSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveFromSubpageSelection">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveFromSubpageSelection" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageHistory">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubpageHistory">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetSubpageHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFile">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyFile">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CopyFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateFile">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDefaultImage">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/SetDefaultImage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFile">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileDescription">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescription" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileDescriptionByUniqueId">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescriptionByUniqueId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFileDescriptions">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFileDescriptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFile">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContactMergeFields">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetContactMergeFields" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunicationSnippets">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationSnippets" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunicationSnippet">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationSnippet" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunicationTemplates">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunicationTemplates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCommunication">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCommunication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrUpdateCommunication">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateOrUpdateCommunication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCommunication">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/DeleteCommunication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateCommunication">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/ValidateCommunication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PreviewCommunication">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/PreviewCommunication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenderCommunication">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RenderCommunication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTask">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageRecordTasks">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetPageRecordTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserTaskCount">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetUserTaskCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTask">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTask">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompleteTask">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CompleteTask" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompleteTasks">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CompleteTasks" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRolePages">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetRolePages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateOrUpdateRolePages">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/CreateOrUpdateRolePages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSelectionSecurity">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddSelectionSecurity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveSelectionSecurity">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemoveSelectionSecurity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPageRecordSecurity">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/AddPageRecordSecurity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemovePageRecordSecurity">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/RemovePageRecordSecurity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentUserInfo">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/GetCurrentUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCurrentUserInfo">
+      <soap:operation soapAction="http://www.thinkministry.com/dataplatform/2012/10/PlatformService/UpdateCurrentUserInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PlatformService">
+    <wsdl:port name="BasicHttpBinding_PlatformService" binding="tns:BasicHttpBinding_PlatformService">
+      <soap:address location="https://my.crossroads.net/ministryplatformapi/PlatformService.svc/soap/oauth" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

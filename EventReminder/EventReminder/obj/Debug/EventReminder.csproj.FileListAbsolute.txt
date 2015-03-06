@@ -1,0 +1,17 @@
+C:\projects\crossroads\EventReminder\EventReminder\bin\Debug\EventReminder.exe.config
+C:\projects\crossroads\EventReminder\EventReminder\bin\Debug\EventReminder.exe
+C:\projects\crossroads\EventReminder\EventReminder\bin\Debug\EventReminder.pdb
+C:\projects\crossroads\EventReminder\EventReminder\obj\Debug\EventReminder.csprojResolveAssemblyReference.cache
+C:\projects\crossroads\EventReminder\EventReminder\obj\Debug\EventReminder.exe
+C:\projects\crossroads\EventReminder\EventReminder\obj\Debug\EventReminder.pdb
+C:\projects\crossroads\EventReminder\EventReminder\bin\Debug\log4net.dll
+C:\projects\crossroads\EventReminder\EventReminder\bin\Debug\log4net.xml
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\bin\Debug\EventReminder.exe.config
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\bin\Debug\EventReminder.exe
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\bin\Debug\EventReminder.pdb
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\bin\Debug\log4net.dll
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\bin\Debug\log4net.xml
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\obj\Debug\EventReminder.exe
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\obj\Debug\EventReminder.pdb
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\bin\Debug\Newtonsoft.Json.dll
+C:\projects\crossroads\crds-angular\EventReminder\EventReminder\obj\Debug\EventReminder.csprojResolveAssemblyReference.cache

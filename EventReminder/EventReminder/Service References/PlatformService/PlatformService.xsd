@@ -1,0 +1,2199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://www.thinkministry.com/dataplatform/2012/10/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://my.crossroads.net/ministryplatformapi/PlatformService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="https://my.crossroads.net/ministryplatformapi/PlatformService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://my.crossroads.net/ministryplatformapi/PlatformService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/Message" />
+  <xs:element name="CreatePageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q1:ArrayOfKeyValueOfstringanyType" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreatePageRecordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreatePageRecordResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q2:ArrayOfKeyValueOfstringanyType" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdatePageRecordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeletePageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element xmlns:q3="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="options" nillable="true" type="q3:ArrayOfDeleteOption" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfDeleteOption">
+    <xs:sequence>
+      <xs:element xmlns:q4="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="DeleteOption" nillable="true" type="q4:DeleteOption" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q5="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfDeleteOption" nillable="true" type="q5:ArrayOfDeleteOption" />
+  <xs:complexType name="DeleteOption">
+    <xs:sequence>
+      <xs:element xmlns:q6="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Action" type="q6:DeleteAction" />
+      <xs:element minOccurs="0" name="ColumnName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewRecordId" nillable="true" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PageId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q7="http://www.thinkministry.com/dataplatform/2012/10/" name="DeleteOption" nillable="true" type="q7:DeleteOption" />
+  <xs:simpleType name="DeleteAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Delete" />
+      <xs:enumeration value="Reassign" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q8="http://www.thinkministry.com/dataplatform/2012/10/" name="DeleteAction" nillable="true" type="q8:DeleteAction" />
+  <xs:element name="DeletePageRecordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateSubpageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q9:ArrayOfKeyValueOfstringanyType" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateSubpageRecordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateSubpageRecordResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateSubpageRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q10:ArrayOfKeyValueOfstringanyType" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateSubpageRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CreateSubpageRecordsResult" nillable="true" type="q11:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSubpageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="values" nillable="true" type="q12:ArrayOfKeyValueOfstringanyType" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSubpageRecordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteSubpageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element xmlns:q13="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="options" nillable="true" type="q13:ArrayOfDeleteOption" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteSubpageRecordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSelectionRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element xmlns:q14="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="values" nillable="true" type="q14:ArrayOfFieldValue" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfFieldValue">
+    <xs:sequence>
+      <xs:element xmlns:q15="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="FieldValue" nillable="true" type="q15:FieldValue" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q16="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfFieldValue" nillable="true" type="q16:ArrayOfFieldValue" />
+  <xs:complexType name="FieldValue">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element xmlns:q17="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Option" type="q17:UpdateOption" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q18="http://www.thinkministry.com/dataplatform/2012/10/" name="FieldValue" nillable="true" type="q18:FieldValue" />
+  <xs:simpleType name="UpdateOption">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Append" />
+      <xs:enumeration value="DateOnly" />
+      <xs:enumeration value="TimeOnly" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q19="http://www.thinkministry.com/dataplatform/2012/10/" name="UpdateOption" nillable="true" type="q19:UpdateOption" />
+  <xs:element name="UpdateSelectionRecordsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteSelectionRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element xmlns:q20="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="options" nillable="true" type="q20:ArrayOfDeleteOption" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteSelectionRecordsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CopyPageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="subpages" nillable="true" type="q21:ArrayOfint" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="startDateTimes" nillable="true" type="q22:ArrayOfdateTime" />
+        <xs:element minOccurs="0" name="updateOriginalRecord" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CopyPageRecordResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageRecordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageRecordResult" nillable="true" type="q23:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="SelectQueryResult">
+    <xs:sequence>
+      <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Data" nillable="true" type="q24:ArrayOfArrayOfanyType" />
+      <xs:element xmlns:q25="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Fields" nillable="true" type="q25:ArrayOfFieldInfo" />
+      <xs:element minOccurs="0" name="SelectedRecords" type="xs:int" />
+      <xs:element minOccurs="0" name="TotalRecords" type="xs:int" />
+      <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Totals" nillable="true" type="q26:ArrayOfanyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q27="http://www.thinkministry.com/dataplatform/2012/10/" name="SelectQueryResult" nillable="true" type="q27:SelectQueryResult" />
+  <xs:complexType name="ArrayOfFieldInfo">
+    <xs:sequence>
+      <xs:element xmlns:q28="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="FieldInfo" nillable="true" type="q28:FieldInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q29="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfFieldInfo" nillable="true" type="q29:ArrayOfFieldInfo" />
+  <xs:complexType name="FieldInfo">
+    <xs:sequence>
+      <xs:element xmlns:q30="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="DataType" type="q30:DataTypes" />
+      <xs:element minOccurs="0" name="Index" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q31="http://www.thinkministry.com/dataplatform/2012/10/" name="FieldInfo" nillable="true" type="q31:FieldInfo" />
+  <xs:simpleType name="DataTypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="String">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Text">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Xml">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Byte">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Integer16">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Integer32">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Integer64">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Decimal">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Real">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Boolean">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Date">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Time">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">11</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DateTime">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">12</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Timestamp">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">13</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Binary">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">14</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Password">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">15</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Money">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Guid">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">17</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Phone">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">18</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Email">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">19</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Variant">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">20</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Separator">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">21</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Image">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">22</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q32="http://www.thinkministry.com/dataplatform/2012/10/" name="DataTypes" nillable="true" type="q32:DataTypes" />
+  <xs:complexType name="ExtendedFieldInfo">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q33="http://www.thinkministry.com/dataplatform/2012/10/" base="q33:FieldInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ForeignPageId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="IsForeignKey" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsPrimaryKey" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsReadOnly" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsRequired" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsRestricted" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Size" type="xs:int" />
+          <xs:element minOccurs="0" name="SortOrder" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q34="http://www.thinkministry.com/dataplatform/2012/10/" name="ExtendedFieldInfo" nillable="true" type="q34:ExtendedFieldInfo" />
+  <xs:element name="GetPageLookupRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sort" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageLookupRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageLookupRecordsResult" nillable="true" type="q35:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageLookupRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sort" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageLookupRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageLookupRecordsResult" nillable="true" type="q36:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sort" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageRecordsResult" nillable="true" type="q37:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageCalendarRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageCalendarRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageCalendarRecordsResult" nillable="true" type="q38:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageViewRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="viewId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sort" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageViewRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageViewRecordsResult" nillable="true" type="q39:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageViewCalendarRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="viewId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageViewCalendarRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageViewCalendarRecordsResult" nillable="true" type="q40:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageRecord">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageRecordResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageRecordResult" nillable="true" type="q41:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sort" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageRecordsResult" nillable="true" type="q42:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageCalendarRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageCalendarRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageCalendarRecordsResult" nillable="true" type="q43:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageViewRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="viewId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sort" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageViewRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageViewRecordsResult" nillable="true" type="q44:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageViewCalendarRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="viewId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageViewCalendarRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageViewCalendarRecordsResult" nillable="true" type="q45:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="sort" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSelectionRecordsResult" nillable="true" type="q46:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionCalendarRecords">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="startDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDateTime" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionCalendarRecordsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSelectionCalendarRecordsResult" nillable="true" type="q47:SelectQueryResult" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetQuickAddPages">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetQuickAddPagesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetQuickAddPagesResult" nillable="true" type="q48:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfItem">
+    <xs:sequence>
+      <xs:element xmlns:q49="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="q49:Item" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q50="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfItem" nillable="true" type="q50:ArrayOfItem" />
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q51="http://www.thinkministry.com/dataplatform/2012/10/" name="Item" nillable="true" type="q51:Item" />
+  <xs:element name="GetQuickAddSubpages">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetQuickAddSubpagesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetQuickAddSubpagesResult" nillable="true" type="q52:ArrayOfSubpageItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfSubpageItem">
+    <xs:sequence>
+      <xs:element xmlns:q53="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="SubpageItem" nillable="true" type="q53:SubpageItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q54="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfSubpageItem" nillable="true" type="q54:ArrayOfSubpageItem" />
+  <xs:complexType name="SubpageItem">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q55="http://www.thinkministry.com/dataplatform/2012/10/" base="q55:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccessLevel" type="q55:PageAccessLevel" />
+          <xs:element minOccurs="0" name="Layouts" type="q55:PageLayouts" />
+          <xs:element minOccurs="0" name="LinkedRecordFieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ParentPageRelationshipType" type="q55:RelationshipType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q56="http://www.thinkministry.com/dataplatform/2012/10/" name="SubpageItem" nillable="true" type="q56:SubpageItem" />
+  <xs:simpleType name="PageAccessLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Read">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReadWrite">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReadWriteAssign">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReadWriteAssignDelete">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q57="http://www.thinkministry.com/dataplatform/2012/10/" name="PageAccessLevel" nillable="true" type="q57:PageAccessLevel" />
+  <xs:simpleType name="PageLayouts">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Grid">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Images">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Calendar">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Gantt">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Timeline">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">31</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element xmlns:q58="http://www.thinkministry.com/dataplatform/2012/10/" name="PageLayouts" nillable="true" type="q58:PageLayouts" />
+  <xs:simpleType name="RelationshipType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="OneToMany" />
+      <xs:enumeration value="ManyToMany" />
+      <xs:enumeration value="ManyToOne" />
+      <xs:enumeration value="Recursive" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q59="http://www.thinkministry.com/dataplatform/2012/10/" name="RelationshipType" nillable="true" type="q59:RelationshipType" />
+  <xs:element name="GetBookmarks">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetBookmarksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q60="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetBookmarksResult" nillable="true" type="q60:ArrayOfBookmark" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfBookmark">
+    <xs:sequence>
+      <xs:element xmlns:q61="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="Bookmark" nillable="true" type="q61:Bookmark" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q62="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfBookmark" nillable="true" type="q62:ArrayOfBookmark" />
+  <xs:complexType name="Bookmark">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q63="http://www.thinkministry.com/dataplatform/2012/10/" base="q63:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ViewOrder" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q64="http://www.thinkministry.com/dataplatform/2012/10/" name="Bookmark" nillable="true" type="q64:Bookmark" />
+  <xs:element name="GetPageSections">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageSectionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q65="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageSectionsResult" nillable="true" type="q65:ArrayOfPageSection" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfPageSection">
+    <xs:sequence>
+      <xs:element xmlns:q66="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="PageSection" nillable="true" type="q66:PageSection" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q67="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfPageSection" nillable="true" type="q67:ArrayOfPageSection" />
+  <xs:complexType name="PageSection">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q68="http://www.thinkministry.com/dataplatform/2012/10/" base="q68:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ImageFileId" type="xs:int" />
+          <xs:element minOccurs="0" name="Pages" nillable="true" type="q68:ArrayOfPageSectionPage" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q69="http://www.thinkministry.com/dataplatform/2012/10/" name="PageSection" nillable="true" type="q69:PageSection" />
+  <xs:complexType name="ArrayOfPageSectionPage">
+    <xs:sequence>
+      <xs:element xmlns:q70="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="PageSectionPage" nillable="true" type="q70:PageSectionPage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q71="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfPageSectionPage" nillable="true" type="q71:ArrayOfPageSectionPage" />
+  <xs:complexType name="PageSectionPage">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q72="http://www.thinkministry.com/dataplatform/2012/10/" base="q72:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ImageFileId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q73="http://www.thinkministry.com/dataplatform/2012/10/" name="PageSectionPage" nillable="true" type="q73:PageSectionPage" />
+  <xs:element name="GetPage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q74="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageResult" nillable="true" type="q74:Page" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Page">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q75="http://www.thinkministry.com/dataplatform/2012/10/" base="q75:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccessLevel" type="q75:PageAccessLevel" />
+          <xs:element minOccurs="0" name="DatePivotFieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DefaultViewId" type="xs:int" />
+          <xs:element minOccurs="0" name="EndDateFieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Features" type="q75:PageFeatures" />
+          <xs:element minOccurs="0" name="FormName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ImageFileId" type="xs:int" />
+          <xs:element minOccurs="0" name="Layouts" type="q75:PageLayouts" />
+          <xs:element minOccurs="0" name="Permissions" type="q75:PagePermissions" />
+          <xs:element minOccurs="0" name="PickListViewId" type="xs:int" />
+          <xs:element minOccurs="0" name="Reports" nillable="true" type="q75:ArrayOfReport" />
+          <xs:element minOccurs="0" name="Selections" nillable="true" type="q75:ArrayOfItem" />
+          <xs:element minOccurs="0" name="SingularName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StartDateFieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Subpages" nillable="true" type="q75:ArrayOfSubpageItem" />
+          <xs:element minOccurs="0" name="Tools" nillable="true" type="q75:ArrayOfTool" />
+          <xs:element minOccurs="0" name="Views" nillable="true" type="q75:ArrayOfView" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q76="http://www.thinkministry.com/dataplatform/2012/10/" name="Page" nillable="true" type="q76:Page" />
+  <xs:simpleType name="PageFeatures">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Search">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Copy">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element xmlns:q77="http://www.thinkministry.com/dataplatform/2012/10/" name="PageFeatures" nillable="true" type="q77:PageFeatures" />
+  <xs:simpleType name="PagePermissions">
+    <xs:list>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="None">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FileAttach">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DataImport">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DataExport">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SecureRecord">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="AddComment">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">16</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="All">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">31</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:list>
+  </xs:simpleType>
+  <xs:element xmlns:q78="http://www.thinkministry.com/dataplatform/2012/10/" name="PagePermissions" nillable="true" type="q78:PagePermissions" />
+  <xs:complexType name="ArrayOfReport">
+    <xs:sequence>
+      <xs:element xmlns:q79="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="Report" nillable="true" type="q79:Report" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q80="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfReport" nillable="true" type="q80:ArrayOfReport" />
+  <xs:complexType name="Report">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q81="http://www.thinkministry.com/dataplatform/2012/10/" base="q81:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ImageFileId" type="xs:int" />
+          <xs:element minOccurs="0" name="IsSelectionRequired" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q82="http://www.thinkministry.com/dataplatform/2012/10/" name="Report" nillable="true" type="q82:Report" />
+  <xs:complexType name="ArrayOfTool">
+    <xs:sequence>
+      <xs:element xmlns:q83="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="Tool" nillable="true" type="q83:Tool" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q84="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfTool" nillable="true" type="q84:ArrayOfTool" />
+  <xs:complexType name="Tool">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q85="http://www.thinkministry.com/dataplatform/2012/10/" base="q85:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ImageFileId" type="xs:int" />
+          <xs:element minOccurs="0" name="Url" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q86="http://www.thinkministry.com/dataplatform/2012/10/" name="Tool" nillable="true" type="q86:Tool" />
+  <xs:complexType name="ArrayOfView">
+    <xs:sequence>
+      <xs:element xmlns:q87="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="View" nillable="true" type="q87:View" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q88="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfView" nillable="true" type="q88:ArrayOfView" />
+  <xs:complexType name="View">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q89="http://www.thinkministry.com/dataplatform/2012/10/" base="q89:Item">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="IsUserView" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q90="http://www.thinkministry.com/dataplatform/2012/10/" name="View" nillable="true" type="q90:View" />
+  <xs:element name="GetPageBySystemName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="systemName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageBySystemNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q91="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageBySystemNameResult" nillable="true" type="q91:Page" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q92="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageResult" nillable="true" type="q92:Subpage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Subpage">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q93="http://www.thinkministry.com/dataplatform/2012/10/" base="q93:SubpageItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="DatePivotFieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DefaultViewId" type="xs:int" />
+          <xs:element minOccurs="0" name="EndDateFieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="FormName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ImageFileId" type="xs:int" />
+          <xs:element minOccurs="0" name="PrimaryPageId" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="PrimaryPageName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Selections" nillable="true" type="q93:ArrayOfItem" />
+          <xs:element minOccurs="0" name="SingularName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="StartDateFieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Views" nillable="true" type="q93:ArrayOfView" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q94="http://www.thinkministry.com/dataplatform/2012/10/" name="Subpage" nillable="true" type="q94:Subpage" />
+  <xs:element name="GetSubpageBySystemName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="systemName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageBySystemNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q95="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageBySystemNameResult" nillable="true" type="q95:Subpage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q96="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="selection" nillable="true" type="q96:SelectionDescription" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="SelectionDescription">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+      <xs:element xmlns:q97="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Kind" type="q97:SelectionKind" />
+      <xs:element minOccurs="0" name="PageId" type="xs:int" />
+      <xs:element minOccurs="0" name="ParentRecordId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SelectionId" type="xs:int" />
+      <xs:element minOccurs="0" name="SubpageId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q98="http://www.thinkministry.com/dataplatform/2012/10/" name="SelectionDescription" nillable="true" type="q98:SelectionDescription" />
+  <xs:simpleType name="SelectionKind">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="Temporary" />
+      <xs:enumeration value="ElevatedSecurity" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q99="http://www.thinkministry.com/dataplatform/2012/10/" name="SelectionKind" nillable="true" type="q99:SelectionKind" />
+  <xs:element name="CreateSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSelectionName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateSelectionNameResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteSelectionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q100="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSelectionResult" nillable="true" type="q100:SelectionDescription" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClearSelections">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClearSelectionsResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddToSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="quickAdd" type="xs:boolean" />
+        <xs:element xmlns:q101="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="records" nillable="true" type="q101:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddToSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddToSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MoveToSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sourceSelectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="targetSelectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="moveRecords" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MoveToSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MoveToSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddToPageSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="viewId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddToPageSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddToPageSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TransferToPageSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sourceSelectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="targetSelectionId" type="xs:int" />
+        <xs:element xmlns:q102="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="path" nillable="true" type="q102:ArrayOfTraverse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfTraverse">
+    <xs:sequence>
+      <xs:element xmlns:q103="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="Traverse" nillable="true" type="q103:Traverse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q104="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfTraverse" nillable="true" type="q104:ArrayOfTraverse" />
+  <xs:complexType name="Traverse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ColumnName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q105="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Direction" type="q105:DependencyType" />
+      <xs:element minOccurs="0" name="TargetPageId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q106="http://www.thinkministry.com/dataplatform/2012/10/" name="Traverse" nillable="true" type="q106:Traverse" />
+  <xs:simpleType name="DependencyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Upstream" />
+      <xs:enumeration value="Downstream" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q107="http://www.thinkministry.com/dataplatform/2012/10/" name="DependencyType" nillable="true" type="q107:DependencyType" />
+  <xs:element name="TransferToPageSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="TransferToPageSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddToSubpageSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="viewId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddToSubpageSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddToSubpageSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element xmlns:q108="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="records" nillable="true" type="q108:ArrayOfint" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveFromSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromPageSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="viewId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromPageSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveFromPageSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromSubpageSelection">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="parentRecordId" type="xs:int" />
+        <xs:element minOccurs="0" name="search" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="viewId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveFromSubpageSelectionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RemoveFromSubpageSelectionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q109="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageHistoryResult" nillable="true" type="q109:ArrayOfAuditMaster" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfAuditMaster">
+    <xs:sequence>
+      <xs:element xmlns:q110="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="AuditMaster" nillable="true" type="q110:AuditMaster" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q111="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfAuditMaster" nillable="true" type="q111:ArrayOfAuditMaster" />
+  <xs:complexType name="AuditMaster">
+    <xs:sequence>
+      <xs:element xmlns:q112="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Action" type="q112:AuditAction" />
+      <xs:element xmlns:q113="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Details" nillable="true" type="q113:ArrayOfAuditDetail" />
+      <xs:element minOccurs="0" name="MasterId" type="xs:int" />
+      <xs:element minOccurs="0" name="RecordId" type="xs:int" />
+      <xs:element minOccurs="0" name="TableName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Time" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q114="http://www.thinkministry.com/dataplatform/2012/10/" name="AuditMaster" nillable="true" type="q114:AuditMaster" />
+  <xs:simpleType name="AuditAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Created" />
+      <xs:enumeration value="Updated" />
+      <xs:enumeration value="Deleted" />
+      <xs:enumeration value="Imported" />
+      <xs:enumeration value="ImportUpdated" />
+      <xs:enumeration value="MassUpdated" />
+      <xs:enumeration value="FirstDupeCheck" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q115="http://www.thinkministry.com/dataplatform/2012/10/" name="AuditAction" nillable="true" type="q115:AuditAction" />
+  <xs:complexType name="ArrayOfAuditDetail">
+    <xs:sequence>
+      <xs:element xmlns:q116="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="AuditDetail" nillable="true" type="q116:AuditDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q117="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfAuditDetail" nillable="true" type="q117:ArrayOfAuditDetail" />
+  <xs:complexType name="AuditDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ColumnDisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ColumnName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DetailId" type="xs:int" />
+      <xs:element minOccurs="0" name="MasterId" type="xs:int" />
+      <xs:element minOccurs="0" name="NewId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="NewValue" nillable="true" type="xs:anyType" />
+      <xs:element minOccurs="0" name="PreviousId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="PreviousValue" nillable="true" type="xs:anyType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q118="http://www.thinkministry.com/dataplatform/2012/10/" name="AuditDetail" nillable="true" type="q118:AuditDetail" />
+  <xs:element name="GetSubpageHistory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="subpageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSubpageHistoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q119="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetSubpageHistoryResult" nillable="true" type="q119:ArrayOfAuditMaster" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isDefaultImage" type="xs:boolean" />
+        <xs:element minOccurs="0" name="longestDimension" type="xs:int" />
+        <xs:element minOccurs="0" name="file" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q120="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="CreateFileResult" nillable="true" type="q120:FileDescription" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="FileDescription">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileId" type="xs:int" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileSize" type="xs:int" />
+      <xs:element minOccurs="0" name="ImageHeight" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="ImageWidth" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="IsDefaultImage" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LastUpdated" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RecordId" type="xs:int" />
+      <xs:element minOccurs="0" name="TableName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UniqueFileId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q121="http://www.thinkministry.com/dataplatform/2012/10/" name="FileDescription" nillable="true" type="q121:FileDescription" />
+  <xs:element name="CopyFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element minOccurs="0" name="fileId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CopyFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q122="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="CopyFileResult" nillable="true" type="q122:FileDescription" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileId" type="xs:int" />
+        <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isDefaultImage" type="xs:boolean" />
+        <xs:element minOccurs="0" name="longestDimension" type="xs:int" />
+        <xs:element minOccurs="0" name="file" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateFileResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDefaultImage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SetDefaultImageResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFileResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileDescription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileDescriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q123="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetFileDescriptionResult" nillable="true" type="q123:FileDescription" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileDescriptionByUniqueId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="uniqueFileId" type="ser:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileDescriptionByUniqueIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q124="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetFileDescriptionByUniqueIdResult" nillable="true" type="q124:FileDescription" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileDescriptions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileDescriptionsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q125="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetFileDescriptionsResult" nillable="true" type="q125:ArrayOfFileDescription" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfFileDescription">
+    <xs:sequence>
+      <xs:element xmlns:q126="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="FileDescription" nillable="true" type="q126:FileDescription" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q127="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfFileDescription" nillable="true" type="q127:ArrayOfFileDescription" />
+  <xs:element name="GetFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="fileId" type="xs:int" />
+        <xs:element minOccurs="0" name="thumbnail" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q128="http://schemas.microsoft.com/Message" name="GetFileResult" type="q128:StreamBody" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetContactMergeFields">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetContactMergeFieldsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q129="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetContactMergeFieldsResult" nillable="true" type="q129:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommunicationSnippets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommunicationSnippetsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q130="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetCommunicationSnippetsResult" nillable="true" type="q130:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommunicationSnippet">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="snippetId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommunicationSnippetResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q131="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetCommunicationSnippetResult" nillable="true" type="q131:CommunicationSnippet" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="CommunicationSnippet">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SnippetId" type="xs:int" />
+      <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q132="http://www.thinkministry.com/dataplatform/2012/10/" name="CommunicationSnippet" nillable="true" type="q132:CommunicationSnippet" />
+  <xs:element name="GetCommunicationTemplates">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommunicationTemplatesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q133="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetCommunicationTemplatesResult" nillable="true" type="q133:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommunication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="communicationId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCommunicationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q134="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetCommunicationResult" nillable="true" type="q134:Communication" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Communication">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorUserId" type="xs:int" />
+      <xs:element minOccurs="0" name="Body" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommunicationId" type="xs:int" />
+      <xs:element minOccurs="0" name="ExpirationDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FromAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FromContactId" type="xs:int" />
+      <xs:element minOccurs="0" name="FromName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReplyToAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReplyToContactId" type="xs:int" />
+      <xs:element minOccurs="0" name="ReplyToName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SelectionId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+      <xs:element xmlns:q135="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Status" type="q135:CommunicationStatus" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaskId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q136="http://www.thinkministry.com/dataplatform/2012/10/" name="Communication" nillable="true" type="q136:Communication" />
+  <xs:simpleType name="CommunicationStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Draft" />
+      <xs:enumeration value="InReview" />
+      <xs:enumeration value="ReadyToSend" />
+      <xs:enumeration value="Sent" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q137="http://www.thinkministry.com/dataplatform/2012/10/" name="CommunicationStatus" nillable="true" type="q137:CommunicationStatus" />
+  <xs:element name="CreateOrUpdateCommunication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q138="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="communication" nillable="true" type="q138:Communication" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateOrUpdateCommunicationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateOrUpdateCommunicationResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteCommunication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="communicationId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteCommunicationResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateCommunication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q139="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="communication" nillable="true" type="q139:Communication" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ValidateCommunicationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q140="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="ValidateCommunicationResult" nillable="true" type="q140:ArrayOfValidationErrorInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfValidationErrorInfo">
+    <xs:sequence>
+      <xs:element xmlns:q141="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="ValidationErrorInfo" nillable="true" type="q141:ValidationErrorInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q142="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfValidationErrorInfo" nillable="true" type="q142:ArrayOfValidationErrorInfo" />
+  <xs:complexType name="ValidationErrorInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IsWarning" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q143="http://www.thinkministry.com/dataplatform/2012/10/" name="ValidationErrorInfo" nillable="true" type="q143:ValidationErrorInfo" />
+  <xs:element name="PreviewCommunication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q144="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="communication" nillable="true" type="q144:Communication" />
+        <xs:element minOccurs="0" name="top" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PreviewCommunicationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q145="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="PreviewCommunicationResult" nillable="true" type="q145:ArrayOfCommunicationMessage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfCommunicationMessage">
+    <xs:sequence>
+      <xs:element xmlns:q146="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="CommunicationMessage" nillable="true" type="q146:CommunicationMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q147="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfCommunicationMessage" nillable="true" type="q147:ArrayOfCommunicationMessage" />
+  <xs:complexType name="CommunicationMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Body" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CommunicationId" type="xs:int" />
+      <xs:element minOccurs="0" name="CommunicationMessageId" type="xs:int" />
+      <xs:element minOccurs="0" name="ContactId" type="xs:int" />
+      <xs:element minOccurs="0" name="FromAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReplyToAddress" nillable="true" type="xs:string" />
+      <xs:element xmlns:q148="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Status" type="q148:CommunicationMessageStatus" />
+      <xs:element minOccurs="0" name="StatusText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StatusTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToAddress" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q149="http://www.thinkministry.com/dataplatform/2012/10/" name="CommunicationMessage" nillable="true" type="q149:CommunicationMessage" />
+  <xs:simpleType name="CommunicationMessageStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Unknown" />
+      <xs:enumeration value="Pending" />
+      <xs:enumeration value="ReadyToSend" />
+      <xs:enumeration value="Sent" />
+      <xs:enumeration value="Error">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q150="http://www.thinkministry.com/dataplatform/2012/10/" name="CommunicationMessageStatus" nillable="true" type="q150:CommunicationMessageStatus" />
+  <xs:element name="RenderCommunication">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="communicationId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RenderCommunicationResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="taskId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTaskResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q151="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetTaskResult" nillable="true" type="q151:Task" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="Task">
+    <xs:sequence>
+      <xs:element xmlns:q152="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Action" type="q152:TaskAction" />
+      <xs:element minOccurs="0" name="AuthorId" type="xs:int" />
+      <xs:element minOccurs="0" name="AuthorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IsCompleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsRejected" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OwnerId" type="xs:int" />
+      <xs:element minOccurs="0" name="OwnerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="RecordId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TaskId" type="xs:int" />
+      <xs:element minOccurs="0" name="TaskName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q153="http://www.thinkministry.com/dataplatform/2012/10/" name="Task" nillable="true" type="q153:Task" />
+  <xs:simpleType name="TaskAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Complete" />
+      <xs:enumeration value="Submit" />
+      <xs:enumeration value="Approve" />
+      <xs:enumeration value="ChangeRecord" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q154="http://www.thinkministry.com/dataplatform/2012/10/" name="TaskAction" nillable="true" type="q154:TaskAction" />
+  <xs:element name="GetPageRecordTasks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPageRecordTasksResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q155="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetPageRecordTasksResult" nillable="true" type="q155:ArrayOfTask" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfTask">
+    <xs:sequence>
+      <xs:element xmlns:q156="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="Task" nillable="true" type="q156:Task" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q157="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfTask" nillable="true" type="q157:ArrayOfTask" />
+  <xs:element name="GetUserTaskCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserTaskCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q158="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetUserTaskCountResult" nillable="true" type="q158:ArrayOfTaskCount" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfTaskCount">
+    <xs:sequence>
+      <xs:element xmlns:q159="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="TaskCount" nillable="true" type="q159:TaskCount" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q160="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfTaskCount" nillable="true" type="q160:ArrayOfTaskCount" />
+  <xs:complexType name="TaskCount">
+    <xs:sequence>
+      <xs:element xmlns:q161="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Action" type="q161:TaskAction" />
+      <xs:element minOccurs="0" name="Count" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q162="http://www.thinkministry.com/dataplatform/2012/10/" name="TaskCount" nillable="true" type="q162:TaskCount" />
+  <xs:element name="CreateTask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="taskName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ownerId" type="xs:int" />
+        <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="pageId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateTaskResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CreateTaskResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="taskId" type="xs:int" />
+        <xs:element minOccurs="0" name="taskName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ownerId" type="xs:int" />
+        <xs:element minOccurs="0" name="startDate" nillable="true" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="endDate" nillable="true" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTaskResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompleteTask">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="taskId" type="xs:int" />
+        <xs:element minOccurs="0" name="rejected" type="xs:boolean" />
+        <xs:element minOccurs="0" name="comments" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompleteTaskResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompleteTasks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="selectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="complete" type="xs:boolean" />
+        <xs:element minOccurs="0" name="submit" type="xs:boolean" />
+        <xs:element minOccurs="0" name="approve" type="xs:boolean" />
+        <xs:element minOccurs="0" name="reject" type="xs:boolean" />
+        <xs:element minOccurs="0" name="rejectionComments" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompleteTasksResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRolePages">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roleId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetRolePagesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q163="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetRolePagesResult" nillable="true" type="q163:ArrayOfRolePage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="ArrayOfRolePage">
+    <xs:sequence>
+      <xs:element xmlns:q164="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="RolePage" nillable="true" type="q164:RolePage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q165="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfRolePage" nillable="true" type="q165:ArrayOfRolePage" />
+  <xs:complexType name="RolePage">
+    <xs:sequence>
+      <xs:element xmlns:q166="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="AccessLevel" type="q166:PageAccessLevel" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element xmlns:q167="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="FieldRestrictions" nillable="true" type="q167:ArrayOfFieldRestriction" />
+      <xs:element minOccurs="0" name="IsOnQuickAdd" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PageId" type="xs:int" />
+      <xs:element xmlns:q168="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Permissions" type="q168:PagePermissions" />
+      <xs:element minOccurs="0" name="RoleId" type="xs:int" />
+      <xs:element xmlns:q169="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="Subpages" nillable="true" type="q169:ArrayOfRoleSubpage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q170="http://www.thinkministry.com/dataplatform/2012/10/" name="RolePage" nillable="true" type="q170:RolePage" />
+  <xs:complexType name="ArrayOfFieldRestriction">
+    <xs:sequence>
+      <xs:element xmlns:q171="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="FieldRestriction" nillable="true" type="q171:FieldRestriction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q172="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfFieldRestriction" nillable="true" type="q172:ArrayOfFieldRestriction" />
+  <xs:complexType name="FieldRestriction">
+    <xs:sequence>
+      <xs:element xmlns:q173="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="AccessLevel" type="q173:ColumnAccessLevel" />
+      <xs:element minOccurs="0" name="ColumnName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageId" type="xs:int" />
+      <xs:element minOccurs="0" name="RoleId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q174="http://www.thinkministry.com/dataplatform/2012/10/" name="FieldRestriction" nillable="true" type="q174:FieldRestriction" />
+  <xs:simpleType name="ColumnAccessLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ReadWrite" />
+      <xs:enumeration value="ReadOnly" />
+      <xs:enumeration value="Hidden" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element xmlns:q175="http://www.thinkministry.com/dataplatform/2012/10/" name="ColumnAccessLevel" nillable="true" type="q175:ColumnAccessLevel" />
+  <xs:complexType name="ArrayOfRoleSubpage">
+    <xs:sequence>
+      <xs:element xmlns:q176="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" maxOccurs="unbounded" name="RoleSubpage" nillable="true" type="q176:RoleSubpage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q177="http://www.thinkministry.com/dataplatform/2012/10/" name="ArrayOfRoleSubpage" nillable="true" type="q177:ArrayOfRoleSubpage" />
+  <xs:complexType name="RoleSubpage">
+    <xs:sequence>
+      <xs:element xmlns:q178="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="AccessLevel" type="q178:PageAccessLevel" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PageId" type="xs:int" />
+      <xs:element minOccurs="0" name="RoleId" type="xs:int" />
+      <xs:element minOccurs="0" name="SubpageId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q179="http://www.thinkministry.com/dataplatform/2012/10/" name="RoleSubpage" nillable="true" type="q179:RoleSubpage" />
+  <xs:element name="CreateOrUpdateRolePages">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="roleId" type="xs:int" />
+        <xs:element xmlns:q180="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="pages" nillable="true" type="q180:ArrayOfRolePage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateOrUpdateRolePagesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddSelectionSecurity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="recordsSelectionId" type="xs:int" />
+        <xs:element minOccurs="0" name="usersSelectionId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="userGroupsSelectionId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="denyAccess" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddSelectionSecurityResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveSelectionSecurity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="recordsSelectionId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveSelectionSecurityResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPageRecordSecurity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+        <xs:element minOccurs="0" name="usersSelectionId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="userGroupsSelectionId" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="denyAccess" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddPageRecordSecurityResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemovePageRecordSecurity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="pageId" type="xs:int" />
+        <xs:element minOccurs="0" name="recordId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemovePageRecordSecurityResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserInfo">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCurrentUserInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q181="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="GetCurrentUserInfoResult" nillable="true" type="q181:UserInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="UserInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContactId" type="xs:int" />
+      <xs:element minOccurs="0" name="DateOfBirth" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DisplayName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmailAddress" nillable="true" type="xs:string" />
+      <xs:element xmlns:q182="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="ExternalIdentities" nillable="true" type="q182:ArrayOfItem" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GenderId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Locale" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MaritalStatusId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="MiddleName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MobilePhone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nickname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrefixId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="SuffixId" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Theme" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeZoneId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q183="http://www.thinkministry.com/dataplatform/2012/10/" name="UserInfo" nillable="true" type="q183:UserInfo" />
+  <xs:element name="UpdateCurrentUserInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q184="http://www.thinkministry.com/dataplatform/2012/10/" minOccurs="0" name="userInfo" nillable="true" type="q184:UserInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateCurrentUserInfoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
