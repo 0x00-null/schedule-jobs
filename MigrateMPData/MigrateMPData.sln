@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrateMPData", "MigrateMPData\MigrateMPData.csproj", "{88CD5303-FEDF-4575-A633-34C13ED13104}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrateMPData.Test", "MigrateMPData.Test\MigrateMPData.Test.csproj", "{597A7BE8-AFA0-4010-A879-3D74F7565E2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88CD5303-FEDF-4575-A633-34C13ED13104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CD5303-FEDF-4575-A633-34C13ED13104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CD5303-FEDF-4575-A633-34C13ED13104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CD5303-FEDF-4575-A633-34C13ED13104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597A7BE8-AFA0-4010-A879-3D74F7565E2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{597A7BE8-AFA0-4010-A879-3D74F7565E2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{597A7BE8-AFA0-4010-A879-3D74F7565E2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597A7BE8-AFA0-4010-A879-3D74F7565E2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
