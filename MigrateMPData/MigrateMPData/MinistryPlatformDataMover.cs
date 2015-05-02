@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.OleDb;
 using System.Reflection;
 
 namespace MigrateMPData
@@ -26,8 +27,62 @@ namespace MigrateMPData
             this.sourceDatabaseName = sourceDatabaseName;
             this.targetDatabaseName = targetDatabaseName;
         }
-
+        
         public bool moveData(MinistryPlatformTable table, bool execute)
+        {
+            if (execute)
+            {
+                setAllowInsertIdentityColumn(table.tableName, true);
+            }
+
+            try
+            {
+                return (doMoveData(table, execute));
+            }
+            finally
+            {
+                if (execute)
+                {
+                    setAllowInsertIdentityColumn(table.tableName, false);
+                }
+            }
+        }
+
+        private void setAllowInsertIdentityColumn(string tableName, bool allow)
+        {
+            var sql = "SET IDENTITY_INSERT {targetDbName}.{tableName} {allow}".Inject(new Dictionary<string, object>
+            {
+                { "targetDbName", targetDatabaseName },
+                { "tableName", tableName },
+                { "allow", allow ? "ON" : "OFF" },
+            });
+            var command = dbConnection.CreateCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = sql;
+
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (DbException e)
+            {
+                logger.Warn("Could not set identity insert for table " + tableName + ": inserts may fail", e);
+            }
+            finally
+            {
+                try
+                {
+                    command.Dispose();
+                }
+                catch (Exception e)
+                {
+                    logger.Warn("Error disposing identity insert command for table " + tableName, e);
+                }
+            }
+
+        }
+
+        private bool doMoveData(MinistryPlatformTable table, bool execute)
         {
             var sqlCommand = createInsertNewSqlCommand(table);
             if (!execute)
@@ -39,7 +94,6 @@ namespace MigrateMPData
             var command = dbConnection.CreateCommand();
             command.CommandType = CommandType.Text;
             command.CommandText = sqlCommand;
-
 
             var tx = dbConnection.BeginTransaction(IsolationLevel.ReadUncommitted);
             try

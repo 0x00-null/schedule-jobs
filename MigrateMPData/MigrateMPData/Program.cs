@@ -14,6 +14,7 @@ using System.ComponentModel;
 using Microsoft.Practices.Unity;
 using MigrateMPData.Interfaces;
 using System.IO;
+using Microsoft.Practices.Unity.Configuration;
 
 [assembly: XmlConfigurator(Watch = true)]
 namespace MigrateMPData
@@ -29,13 +30,9 @@ namespace MigrateMPData
         {
             XmlConfigurator.Configure();
 
-            UnityContainer container;
-            using (container = new UnityContainer())
-            {
-                container.RegisterTypes(AllClasses.FromLoadedAssemblies(),
-                            WithMappings.FromMatchingInterface,
-                            WithName.Default);
-            }
+            var section = (UnityConfigurationSection)ConfigurationManager.GetSection("unity");
+            IUnityContainer container = new UnityContainer();
+            section.Configure(container);
 
             var options = new Options();
             if (!CommandLine.Parser.Default.ParseArguments(args, options))
@@ -46,9 +43,8 @@ namespace MigrateMPData
             }
 
             Program program = container.Resolve<Program>();
-            program.Run(options);
-
             logger.Info("Starting data migration");
+            program.Run(options);
         }
 
         public Program(IMinistryPlatformTableConfigReader configReader, IMinistryPlatformDataMover dataMover)
@@ -86,10 +82,6 @@ namespace MigrateMPData
         [Option('x', "execute", Required = false, DefaultValue = false,
           HelpText = "Execute mode - by default will run in 'test' mode")]
         public bool ExecuteMode { get; set; }
-
-        [Option('v', "verbose", DefaultValue = false,
-          HelpText = "Prints all messages to standard output.")]
-        public bool Verbose { get; set; }
 
         [ParserState]
         public IParserState LastParserState { get; set; }

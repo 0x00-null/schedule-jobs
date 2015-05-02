@@ -54,6 +54,8 @@ namespace MigrateMPData.Test
             dbConnection.Setup(mocked => mocked.BeginTransaction(IsolationLevel.ReadUncommitted)).Returns(dbTransaction.Object);
             dbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = It.IsRegex(@"^INSERT INTO dest\.table1.*FROM src\.table1 WHERE 1 = 1 EXCEPT.*FROM dest\.table1.*")).Verifiable();
+            dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 ON").Verifiable();
+            dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 OFF").Verifiable();
             dbCommand.Setup(mocked => mocked.ExecuteNonQuery()).Returns(1);
             dbTransaction.Setup(mocked => mocked.Commit());
             dbCommand.Setup(mocked => mocked.Dispose());
@@ -61,6 +63,7 @@ namespace MigrateMPData.Test
             Assert.IsTrue(fixture.moveData(table, true));
 
             dbConnection.VerifyAll();
+            dbCommand.Verify(mocked => mocked.ExecuteNonQuery(), Times.Exactly(3));
             dbCommand.VerifyAll();
             dbTransaction.VerifyAll();
         }
@@ -80,6 +83,8 @@ namespace MigrateMPData.Test
             dbConnection.Setup(mocked => mocked.BeginTransaction(IsolationLevel.ReadUncommitted)).Returns(dbTransaction.Object);
             dbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = It.IsRegex(@"^INSERT INTO dest\.table1.*FROM src\.table1  EXCEPT.*FROM dest\.table1.*")).Verifiable();
+            dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 ON").Verifiable();
+            dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 OFF").Verifiable();
             dbCommand.Setup(mocked => mocked.ExecuteNonQuery()).Throws(dbException.Object);
             dbTransaction.Setup(mocked => mocked.Rollback());
             dbCommand.Setup(mocked => mocked.Dispose());
@@ -94,6 +99,7 @@ namespace MigrateMPData.Test
             }
 
             dbConnection.VerifyAll();
+            dbCommand.Verify(mocked => mocked.ExecuteNonQuery(), Times.Exactly(3));
             dbCommand.VerifyAll();
             dbTransaction.VerifyAll();
         }
