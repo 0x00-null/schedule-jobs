@@ -32,6 +32,7 @@ namespace MigrateMPData
         {
             if (execute)
             {
+                dbConnection.Open();
                 setAllowInsertIdentityColumn(table.tableName, true);
             }
 
@@ -44,6 +45,14 @@ namespace MigrateMPData
                 if (execute)
                 {
                     setAllowInsertIdentityColumn(table.tableName, false);
+                    try
+                    {
+                        dbConnection.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        logger.Warn("Error closing DB Connection for table " + table.tableName, e);
+                    }
                 }
             }
         }
@@ -96,6 +105,7 @@ namespace MigrateMPData
             command.CommandText = sqlCommand;
 
             var tx = dbConnection.BeginTransaction(IsolationLevel.ReadUncommitted);
+            command.Transaction = tx;
             try
             {
                 int numRows = command.ExecuteNonQuery();

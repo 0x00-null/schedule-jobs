@@ -50,9 +50,12 @@ namespace MigrateMPData.Test
                 filterClause = "1 = 1"
             };
 
+            dbConnection.Setup(mocked => mocked.Open());
+            dbConnection.Setup(mocked => mocked.Close());
             dbConnection.Setup(mocked => mocked.CreateCommand()).Returns(dbCommand.Object);
             dbConnection.Setup(mocked => mocked.BeginTransaction(IsolationLevel.ReadUncommitted)).Returns(dbTransaction.Object);
             dbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
+            dbCommand.SetupSet(mocked => mocked.Transaction = dbTransaction.Object).Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = It.IsRegex(@"^INSERT INTO dest\.table1.*FROM src\.table1 WHERE 1 = 1 EXCEPT.*FROM dest\.table1.*")).Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 ON").Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 OFF").Verifiable();
@@ -79,9 +82,12 @@ namespace MigrateMPData.Test
 
             var dbException = new Mock<DbException>();
 
+            dbConnection.Setup(mocked => mocked.Open());
+            dbConnection.Setup(mocked => mocked.Close());
             dbConnection.Setup(mocked => mocked.CreateCommand()).Returns(dbCommand.Object);
             dbConnection.Setup(mocked => mocked.BeginTransaction(IsolationLevel.ReadUncommitted)).Returns(dbTransaction.Object);
             dbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
+            dbCommand.SetupSet(mocked => mocked.Transaction = dbTransaction.Object).Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = It.IsRegex(@"^INSERT INTO dest\.table1.*FROM src\.table1  EXCEPT.*FROM dest\.table1.*")).Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 ON").Verifiable();
             dbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 OFF").Verifiable();

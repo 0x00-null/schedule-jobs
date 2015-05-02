@@ -56,7 +56,7 @@ namespace MigrateMPData
         public void Run(Options options) {
             logger.Info("Beginning Data Migration using input file " + options.InputFile);
             List<MinistryPlatformTable> tables = configReader.readConfig(options.InputFile);
-            logger.Debug("Tables to migrate: " + string.Join<MinistryPlatformTable>(",", tables.ToArray()));
+            logger.Debug("Tables to migrate: " + string.Join<MinistryPlatformTable>(",\r\n", tables.ToArray()));
             foreach (var table in tables)
             {
                 logger.Info("Migrating table: " + table.tableName);
