@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 
 namespace MigrateMPData
 {
@@ -19,11 +21,14 @@ namespace MigrateMPData
 
         private string targetDatabaseName;
 
-        private IDbConnection dbConnection;
+        private IDbConnection sourceDbConnection;
 
-        public MinistryPlatformDataMover(IDbConnection dbConnection, string sourceDatabaseName, string targetDatabaseName)
+        private IDbConnection targetDbConnection;
+
+        public MinistryPlatformDataMover(IDbConnection sourceDbConnection, IDbConnection targetDbConnection, string sourceDatabaseName, string targetDatabaseName)
         {
-            this.dbConnection = dbConnection;
+            this.sourceDbConnection = sourceDbConnection;
+            this.targetDbConnection = targetDbConnection;
             this.sourceDatabaseName = sourceDatabaseName;
             this.targetDatabaseName = targetDatabaseName;
         }
@@ -32,12 +37,17 @@ namespace MigrateMPData
         {
             if (execute)
             {
-                dbConnection.Open();
+                sourceDbConnection.Open();
+                targetDbConnection.Open();
             }
 
             try
             {
-                return (doMoveData(table, execute));
+                logger.Info("BEGIN: Moving data for table " + table.tableName);
+                var response = doMoveData(table, execute);
+                logger.Info("DONE:  Moving data for table " + table.tableName);
+
+                return (response);
             }
             finally
             {
@@ -45,7 +55,8 @@ namespace MigrateMPData
                 {
                     try
                     {
-                        dbConnection.Close();
+                        sourceDbConnection.Close();
+                        targetDbConnection.Close();
                     }
                     catch (Exception e)
                     {
@@ -63,7 +74,7 @@ namespace MigrateMPData
                 { "tableName", tableName },
                 { "allow", allow ? "ON" : "OFF" },
             });
-            var command = dbConnection.CreateCommand();
+            var command = targetDbConnection.CreateCommand();
             command.CommandType = CommandType.Text;
             command.CommandText = sql;
             command.Transaction = tx;
@@ -89,34 +100,70 @@ namespace MigrateMPData
                     logger.Warn("Error disposing identity insert command for table " + tableName, e);
                 }
             }
-
         }
 
         private bool doMoveData(MinistryPlatformTable table, bool execute)
         {
             if (!execute)
             {
-                logger.Debug("Not moving data");
+                logger.Info("Running in test mode, not moving data for table " + table.tableName);
                 return (true);
             }
 
-            var sqlCommand = createInsertNewSqlCommand(table);
-            logger.Debug("SQL Command: " + sqlCommand);
+            var selectCommand = sourceDbConnection.CreateCommand();
+            selectCommand.CommandType = CommandType.Text;
+            selectCommand.CommandText = createSelectSqlCommand(table);
 
-            var command = dbConnection.CreateCommand();
-            command.CommandType = CommandType.Text;
-            command.CommandText = sqlCommand;
+            var insertCommand = targetDbConnection.CreateCommand();
+            insertCommand.CommandType = CommandType.Text;
+            insertCommand.CommandText = createInsertSqlCommand(table);
+            var tx = insertCommand.Transaction = targetDbConnection.BeginTransaction(System.Data.IsolationLevel.ReadUncommitted);
 
-            var tx = dbConnection.BeginTransaction(IsolationLevel.ReadUncommitted);
-            command.Transaction = tx;
+            IDataReader reader = null;
             try
             {
                 setAllowInsertIdentityColumn(table.tableName, tx, true);
 
-                int numRows = command.ExecuteNonQuery();
+                reader = selectCommand.ExecuteReader();
+
+                logger.Debug("Insert SQL: " + insertCommand.CommandText);
+
+                bool first = true;
+                int count = 0;
+                while (reader.Read())
+                {
+                    if (first)
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            var p = insertCommand.CreateParameter();
+                            p.ParameterName = "@" + reader.GetName(i);
+                            p.DbType = Parameter.ConvertTypeCodeToDbType(Type.GetTypeCode(reader.GetFieldType(i)));
+                            p.Size = reader.GetSchemaTable().Rows[i].Field<int>("ColumnSize");
+                            p.Precision = (byte)reader.GetSchemaTable().Rows[i].Field<short>("NumericPrecision");
+                            p.Scale = (byte)reader.GetSchemaTable().Rows[i].Field<short>("NumericScale");
+
+                            insertCommand.Parameters.Add(p);
+                            logger.Debug("Parameter: " + p.ParameterName + " DbType: " + p.DbType);
+                        }
+                        insertCommand.Prepare();
+                        first = false;
+                    }
+
+                    for (int i = 0; i < reader.FieldCount; i++)
+                    {
+                        ((IDbDataParameter)insertCommand.Parameters[i]).Value = reader.GetValue(i);
+                    }
+
+                    insertCommand.ExecuteNonQuery();
+                    if (++count % 10 == 0)
+                    {
+                        logger.Info("Migrated " + count + " rows for table " + table.tableName);
+                    }
+                }
+                logger.Info("Migrated " + count + " rows for table " + table.tableName);
 
                 setAllowInsertIdentityColumn(table.tableName, tx, false);
-
                 tx.Commit();
 
                 return (true);
@@ -126,42 +173,66 @@ namespace MigrateMPData
                 logger.Error("Error updating table " + table.tableName, e);
                 setAllowInsertIdentityColumn(table.tableName, tx, false);
                 tx.Rollback();
-                throw (e);
+                return (false);
             }
             finally
             {
                 try
                 {
-                    command.Dispose();
+                    selectCommand.Dispose();
+                    insertCommand.Dispose();
                 }
                 catch (Exception e)
                 {
                     logger.Warn("Error disposing command for table " + table.tableName, e);
                 }
             }
+
         }
 
-        private string createInsertNewSqlCommand(MinistryPlatformTable table)
+        private string createSelectSqlCommand(MinistryPlatformTable table)
         {
-            string sql =
-                  "INSERT INTO {targetDbName}.{tableName} ({columns}) "
-                + "SELECT * FROM {sourceDbName}.{tableName} {filterClause} "
-                + "EXCEPT SELECT * FROM {targetDbName}.{tableName}";
+            var sql = "SELECT {columns} FROM {sourceDbName}.{tableName} {filterClause} EXCEPT SELECT * FROM {targetDbName}.{tableName}";
             string filterClause = table.filterClause != null && table.filterClause.Length > 0 ? "WHERE " + table.filterClause : "";
-
+            var columns = getColumnsForTable(table.tableName);
             var parms = new Dictionary<string, string>{
-                            { "columns", getColumnNamesForTable(table.tableName) },
-                            { "tableName", table.tableName},
+                            { "columns", String.Join(", ", columns) },
                             { "sourceDbName", sourceDatabaseName},
                             { "targetDbName", targetDatabaseName},
+                            { "tableName", table.tableName},
                             { "filterClause", filterClause},
                         };
             return (sql.Inject(parms));
         }
 
-        private string getColumnNamesForTable(string tableName)
+        private string createInsertSqlCommand(MinistryPlatformTable table)
         {
-            Regex regex = new Regex(@".*\.\[(.*)\]$");
+            var sql = "INSERT INTO {targetDbName}.{tableName} ({columns}) VALUES ({placeholders}) ";
+
+            var columns = getColumnsForTable(table.tableName);
+            StringBuilder placeholders = new StringBuilder();
+            Regex columnName = new Regex(@".*\[(.*)\]");
+            for (int i = 0; i < columns.Count; i++)
+            {
+                if (i > 0)
+                {
+                    placeholders.Append(", ");
+                }
+                placeholders.Append("@").Append(columnName.Replace(columns[i], "$1"));
+            }
+
+            var parms = new Dictionary<string, string>{
+                            { "columns", String.Join(", ", columns) },
+                            { "targetDbName", targetDatabaseName},
+                            { "tableName", table.tableName},
+                            { "placeholders", placeholders.ToString() },
+                        };
+            return (sql.Inject(parms));
+        }
+
+        private List<string> getColumnsForTable(string tableName)
+        {
+            Regex regex = new Regex(@".*\.\[(.*)\]");
             var table = regex.Replace(tableName, "$1");
             string sql = "SELECT CONCAT('[', [Column_Name], ']') FROM {sourceDbName}.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{tableName}' ORDER BY ordinal_position".Inject(new Dictionary<string, object>
             {
@@ -169,7 +240,7 @@ namespace MigrateMPData
                 { "tableName", table},
             });
 
-            var command = dbConnection.CreateCommand();
+            var command = sourceDbConnection.CreateCommand();
             command.CommandType = CommandType.Text;
             command.CommandText = sql;
 
@@ -205,11 +276,8 @@ namespace MigrateMPData
                 }
             }
 
-            var columnNames = String.Join(", ", columns.ToArray());
-            logger.Debug("Column names: " + columnNames);
-
-            return(columnNames);
-
+            return(columns);
         }
+
     }
 }
