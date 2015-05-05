@@ -13,6 +13,7 @@ MigrateMPData -f fileName [-x] [--help]
 ```
 ## Environment Variables
 The following environment variables must be set:
+
 1. MP_SOURCE_DB_USER - the username to use when connecting to the source MP database (a SQLServer user, not a Windows user)
 2. MP_SOURCE_DB_PASSWORD - the password for the abover user
 3. MP_TARGET_DB_USER - the username to use when connecting to the target MP database (a SQLServer user, not a Windows user)
