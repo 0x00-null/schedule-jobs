@@ -27,7 +27,7 @@ namespace MigrateMPData.UnityUtil
 
             DbProviderFactory providerFactory = DbProviderFactories.GetFactory(connectionStringSettings.ProviderName);
             IDbConnection connection = providerFactory.CreateConnection();
-            connection.ConnectionString = connectionStringSettings.ConnectionString;
+            connection.ConnectionString = Environment.ExpandEnvironmentVariables(connectionStringSettings.ConnectionString);
             return connection;
         }
     }
