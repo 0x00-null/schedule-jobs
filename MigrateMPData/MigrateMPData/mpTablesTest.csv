@@ -5,11 +5,13 @@
 #
 #    MigrationType (optional):
 #        Migration type, currently the following values are supported, 
-#        with INSERT_ONLY being the default if not specified:
+#        with INSERT_OR_UPDATE being the default if not specified:
 #          * INSERT_ONLY - only "new" rows that don't exist in the target will be migrated, existing rows will not be updated
 #          * INSERT_OR_UPDATE - migrate "new" rows, and update any existing rows that may have changed
 #
 #    FilterClause (optional)
 #        This specifies any filtering that should be applied when selecting rows to insert.  Use "S" as
 #        a prefix when referencing columns in the source table.
+[dbo].[dp_Communications],INSERT_ONLY,S.[Template] = 1
+[dbo].[Rooms],,
 [dbo].[Zip_Codes],,
