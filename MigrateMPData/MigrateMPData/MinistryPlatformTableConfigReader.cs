@@ -13,10 +13,6 @@ namespace MigrateMPData
     {
         private static readonly ILog logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public MinistryPlatformTableConfigReader()
-        {
-        }
-
         public List<MinistryPlatformTable> readConfig(string fileName)
         {
             try
