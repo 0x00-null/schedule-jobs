@@ -79,9 +79,7 @@
     <None Include="mpTables-IntToDemo.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="mpTablesTest.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="mpTables-Test.csv" />
     <None Include="packages.config" />
     <None Include="README.md" />
   </ItemGroup>
