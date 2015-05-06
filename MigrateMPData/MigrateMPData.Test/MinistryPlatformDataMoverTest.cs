@@ -76,8 +76,8 @@ namespace MigrateMPData.Test
             sourceDbConnection.Setup(mocked => mocked.Close());
             sourceDbConnection.Setup(mocked => mocked.CreateCommand()).Returns(sourceDbCommand.Object);
             sourceDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
-            sourceDbCommand.Setup(mocked => mocked.ExecuteReader()).Returns(new Queue<IDataReader>(new[] { sourceDbColumnNameReader.Object, sourceDbColumnNameReader.Object, sourceDbDataReader.Object }).Dequeue);
-            sourceDbColumnNameReader.Setup(mocked => mocked.Read()).Returns(new Queue<bool>(new[] { true, false, true, false }).Dequeue);
+            sourceDbCommand.Setup(mocked => mocked.ExecuteReader()).Returns(new Queue<IDataReader>(new[] { sourceDbColumnNameReader.Object, sourceDbColumnNameReader.Object, sourceDbColumnNameReader.Object, sourceDbDataReader.Object }).Dequeue);
+            sourceDbColumnNameReader.Setup(mocked => mocked.Read()).Returns(new Queue<bool>(new[] { true, false, true, false, true, false }).Dequeue);
             sourceDbColumnNameReader.Setup(mocked => mocked.GetString(0)).Returns("column_name");
             sourceDbColumnNameReader.Setup(mocked => mocked.Close());
             sourceDbColumnNameReader.Setup(mocked => mocked.Dispose());
@@ -89,7 +89,7 @@ namespace MigrateMPData.Test
             sourceDbDataReader.Setup(mocked => mocked.GetValue(0)).Returns("value1");
 
             sourceDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
-            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1 AS S WHERE 1 = 1 EXCEPT SELECT * FROM dest.table1").Verifiable();
+            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1 AS S WHERE 1 = 1 EXCEPT SELECT * FROM dest.table1 ").Verifiable();
             sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT CONCAT('[', [Column_Name], ']') FROM src.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'table1' ORDER BY ordinal_position").Verifiable();
             sourceDbCommand.Setup(mocked => mocked.Dispose());
 
@@ -116,12 +116,18 @@ namespace MigrateMPData.Test
             targetDbCommand.Setup(mocked => mocked.Dispose());
 
             targetDbCommand.SetupSet(mocked => mocked.Transaction = dbTransaction.Object).Verifiable();
+            targetDbCommand.SetupSet(mocked => mocked.CommandText = "UPDATE dest.table1 SET  WHERE column_name = @column_name").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "INSERT INTO dest.table1 (column_name) VALUES (@column_name) ").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 ON").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 OFF").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT COUNT(*) FROM dest.sys.columns WHERE IS_IDENTITY = 1 AND OBJECT_NAME(object_id) = 'table1'").Verifiable();
+            targetDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM dest.INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(constraint_name), 'IsPrimaryKey') = 1 AND table_name = 'table1'").Verifiable();
             targetDbCommand.Setup(mocked => mocked.ExecuteScalar()).Returns(1);
             targetDbCommand.Setup(mocked => mocked.ExecuteNonQuery()).Returns(1);
+            Mock<IDataReader> pkReader = new Mock<IDataReader>();
+            targetDbCommand.Setup(mocked => mocked.ExecuteReader()).Returns(pkReader.Object);
+            pkReader.Setup(mocked => mocked.Read()).Returns(new Queue<bool>(new[] { true, false }).Dequeue);
+            pkReader.Setup(mocked => mocked.GetString(0)).Returns("column_name");
             dbTransaction.Setup(mocked => mocked.Commit());
 
 
@@ -149,8 +155,8 @@ namespace MigrateMPData.Test
             sourceDbConnection.Setup(mocked => mocked.Close());
             sourceDbConnection.Setup(mocked => mocked.CreateCommand()).Returns(sourceDbCommand.Object);
             sourceDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
-            sourceDbCommand.Setup(mocked => mocked.ExecuteReader()).Returns(new Queue<IDataReader>(new[] { sourceDbColumnNameReader.Object, sourceDbColumnNameReader.Object, sourceDbDataReader.Object }).Dequeue);
-            sourceDbColumnNameReader.Setup(mocked => mocked.Read()).Returns(new Queue<bool>(new[] { true, false, true, false }).Dequeue);
+            sourceDbCommand.Setup(mocked => mocked.ExecuteReader()).Returns(new Queue<IDataReader>(new[] { sourceDbColumnNameReader.Object, sourceDbColumnNameReader.Object, sourceDbColumnNameReader.Object, sourceDbDataReader.Object }).Dequeue);
+            sourceDbColumnNameReader.Setup(mocked => mocked.Read()).Returns(new Queue<bool>(new[] { true, false, true, false, true, false }).Dequeue);
             sourceDbColumnNameReader.Setup(mocked => mocked.GetString(0)).Returns("column_name");
             sourceDbColumnNameReader.Setup(mocked => mocked.Close());
             sourceDbColumnNameReader.Setup(mocked => mocked.Dispose());
@@ -162,14 +168,14 @@ namespace MigrateMPData.Test
             sourceDbDataReader.Setup(mocked => mocked.GetValue(0)).Returns("value1");
 
             sourceDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
-            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1 AS S  EXCEPT SELECT * FROM dest.table1").Verifiable();
+            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1 AS S  EXCEPT SELECT * FROM dest.table1 ").Verifiable();
             sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT CONCAT('[', [Column_Name], ']') FROM src.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'table1' ORDER BY ordinal_position").Verifiable();
             sourceDbCommand.Setup(mocked => mocked.Dispose());
 
             targetDbConnection.SetupGet(mocked => mocked.Database).Returns(targetDbName);
             targetDbConnection.Setup(mocked => mocked.Open());
             targetDbConnection.Setup(mocked => mocked.Close());
-            targetDbConnection.Setup(mocked => mocked.CreateCommand()).Returns(new Queue<IDbCommand>(new[] { targetDbCommand.Object, targetDbCommand.Object, targetDbCommand.Object }).Dequeue);
+            targetDbConnection.Setup(mocked => mocked.CreateCommand()).Returns(targetDbCommand.Object);
             targetDbConnection.Setup(mocked => mocked.BeginTransaction(IsolationLevel.ReadUncommitted)).Returns(dbTransaction.Object);
             targetDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
             targetDbCommand.SetupGet(mocked => mocked.CommandText).Returns("");
@@ -189,10 +195,17 @@ namespace MigrateMPData.Test
             targetDbCommand.Setup(mocked => mocked.Dispose());
 
             targetDbCommand.SetupSet(mocked => mocked.Transaction = dbTransaction.Object).Verifiable();
+            targetDbCommand.SetupSet(mocked => mocked.CommandText = "UPDATE dest.table1 SET  WHERE column_name = @column_name").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "INSERT INTO dest.table1 (column_name) VALUES (@column_name) ").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT COUNT(*) FROM dest.sys.columns WHERE IS_IDENTITY = 1 AND OBJECT_NAME(object_id) = 'table1'").Verifiable();
+            targetDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM dest.INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE OBJECTPROPERTY(OBJECT_ID(constraint_name), 'IsPrimaryKey') = 1 AND table_name = 'table1'").Verifiable();
             targetDbCommand.Setup(mocked => mocked.ExecuteScalar()).Returns(0);
             targetDbCommand.Setup(mocked => mocked.ExecuteNonQuery()).Throws(dbException.Object);
+            Mock<IDataReader> pkReader = new Mock<IDataReader>();
+            targetDbCommand.Setup(mocked => mocked.ExecuteReader()).Returns(pkReader.Object);
+            pkReader.Setup(mocked => mocked.Read()).Returns(new Queue<bool>(new[] { true, false }).Dequeue);
+            pkReader.Setup(mocked => mocked.GetString(0)).Returns("column_name");
+
             dbTransaction.Setup(mocked => mocked.Rollback());
 
             try
