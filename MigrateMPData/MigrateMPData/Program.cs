@@ -45,6 +45,7 @@ namespace MigrateMPData
             Program program = container.Resolve<Program>();
             logger.Info("Starting data migration");
             program.Run(options);
+            logger.Info("Finishing data migration");
         }
 
         public Program(IMinistryPlatformTableConfigReader configReader, IMinistryPlatformDataMover dataMover)
@@ -70,6 +71,7 @@ namespace MigrateMPData
                     logger.Error("Failed to migrate table: " + table.tableName);
                 }
             }
+            logger.Info("Finishing Data Migration using input file " + options.InputFile);
         }
     }
 
