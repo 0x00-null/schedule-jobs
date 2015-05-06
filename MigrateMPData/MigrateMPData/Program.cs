@@ -46,6 +46,7 @@ namespace MigrateMPData
             logger.Info("Starting data migration");
             program.Run(options);
             logger.Info("Finishing data migration");
+            System.Environment.Exit(0);
         }
 
         public Program(IMinistryPlatformTableConfigReader configReader, IMinistryPlatformDataMover dataMover)
