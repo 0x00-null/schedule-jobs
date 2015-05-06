@@ -1,16 +1,17 @@
-﻿#TableName,FilterClause,JoinClause
+﻿#TableName,MigrationType,FilterClause
 #
-#    TableName: 
-#        Make sure to specify the catalog name and table name, enclosed in square brackets appropriately.
+#    TableName (required):
+#        Make sure to specify the catalog name and table name, enclosed in square brackets appropriately
 #
-#    FilterClause:
+#    MigrationType (optional):
+#        Migration type, currently the following values are supported, 
+#        with INSERT_ONLY being the default if not specified:
+#          * INSERT_ONLY - only "new" rows that don't exist in the target will be migrated, existing rows will not be updated
+#          * INSERT_OR_UPDATE - migrate "new" rows, and update any existing rows that may have changed
+#
+#    FilterClause (optional)
 #        This specifies any filtering that should be applied when selecting rows to insert.  Use "S" as
-#        a prefix for the source table, and D as a prefix for the destination table
-#
-#    JoinClause:
-#        Currently unused.  This would specify a join clause for the tables, if something other than the 
-#        primary key should be used for matching.
-#
+#        a prefix when referencing columns in the source table.
 [dbo].[Account_Types],,
 [dbo].[Age_Groups],,
 [dbo].[Attribute_Categories],,
@@ -38,7 +39,7 @@
 [dbo].[dp_Communication_Snippets],,
 [dbo].[dp_Communication_Statuses],,
 [dbo].[dp_Communication_User_Groups],,
-[dbo].[dp_Communications,S.[Template] = 1,
+[dbo].[dp_Communications],,S.[Template] = 1
 [dbo].[dp_Configuration_Settings],,
 [dbo].[dp_Page_Section_Pages],,
 [dbo].[dp_Page_Sections],,

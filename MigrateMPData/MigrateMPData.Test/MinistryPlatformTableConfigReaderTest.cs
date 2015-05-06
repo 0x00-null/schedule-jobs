@@ -1,11 +1,7 @@
 ﻿using MigrateMPData.Models;
-using Moq;
 using NUnit.Framework;
-using System.Data;
-using System.Data.Common;
 using System.IO;
 using System.Text;
-using System.Linq;
 
 namespace MigrateMPData.Test
 {
@@ -29,33 +25,35 @@ namespace MigrateMPData.Test
             sw.WriteLine("# this is a comment");
             sw.WriteLine("-- this is another comment");
             sw.WriteLine("' this,is,yet another comment");
-            sw.WriteLine("table1,,");
+            sw.WriteLine("table1,INSERT_ONLY,");
             expectedTables.Add(new MinistryPlatformTable
             {
                 tableName = "table1",
+                migrationType = MigrationType.INSERT_ONLY,
             });
 
             sw.WriteLine("// this is another comment in between some tables");
 
-            sw.WriteLine("table2_no_join,filter2,");
+            sw.WriteLine("table2_no_type,,filter2");
             expectedTables.Add(new MinistryPlatformTable
             {
-                tableName = "table2_no_join",
-                filterClause = "filter2"
+                tableName = "table2_no_type",
+                filterClause = "filter2",
+                migrationType = MigrationType.INSERT_OR_UPDATE,
             });
 
-            sw.WriteLine("table3_no_filter,,join3");
+            sw.WriteLine("table3_no_filter,INSERT_ONLY,");
             expectedTables.Add(new MinistryPlatformTable
             {
                 tableName = "table3_no_filter",
-                joinClause = "join3"
+                migrationType = MigrationType.INSERT_ONLY,
             });
 
-            sw.WriteLine("table4,filter4,join4");
+            sw.WriteLine("table4,INSERT_ONLY,filter4");
             expectedTables.Add(new MinistryPlatformTable
             {
                 tableName = "table4",
-                joinClause = "join4",
+                migrationType = MigrationType.INSERT_ONLY,
                 filterClause = "filter4"
             });
 
@@ -78,7 +76,7 @@ namespace MigrateMPData.Test
                 var a = tables[i];
                 Assert.AreEqual(e.tableName, a.tableName);
                 Assert.AreEqual(e.filterClause, a.filterClause);
-                Assert.AreEqual(e.joinClause, a.joinClause);
+                Assert.AreEqual(e.migrationType, a.migrationType);
             }
         }
     }

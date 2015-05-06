@@ -1,11 +1,15 @@
-﻿#TableName,FilterClause,JoinClause
+﻿#TableName,MigrationType,FilterClause
 #
-#TableName: 
-#    Make sure to specify the catalog name and table name, enclosed in square brackets appropriately
-#FilterClause
-#    This specifies any filtering that should be applied when selecting rows to insert.  Use "S" as
-#    a prefix for the source table, and D as a prefix for the destination table
-#JoinClause
-#    Currently unused.  This would specify a join clause for the tables, if something other than the 
-#    primary key should be used for matching.
+#    TableName (required):
+#        Make sure to specify the catalog name and table name, enclosed in square brackets appropriately
+#
+#    MigrationType (optional):
+#        Migration type, currently the following values are supported, 
+#        with INSERT_ONLY being the default if not specified:
+#          * INSERT_ONLY - only "new" rows that don't exist in the target will be migrated, existing rows will not be updated
+#          * INSERT_OR_UPDATE - migrate "new" rows, and update any existing rows that may have changed
+#
+#    FilterClause (optional)
+#        This specifies any filtering that should be applied when selecting rows to insert.  Use "S" as
+#        a prefix when referencing columns in the source table.
 [dbo].[Zip_Codes],,

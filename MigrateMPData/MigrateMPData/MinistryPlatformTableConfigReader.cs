@@ -51,8 +51,8 @@ namespace MigrateMPData
                     var t = new MinistryPlatformTable
                     {
                         tableName = fields[0],
-                        filterClause = fields[1].Length > 0 ? fields[1] : null,
-                        joinClause = fields[2].Length > 0 ? fields[2] : null
+                        migrationType = fields[1].Length > 0 ? (MigrationType)Enum.Parse(typeof(MigrationType), fields[1]) : MigrationType.INSERT_OR_UPDATE,
+                        filterClause = fields[2].Length > 0 ? fields[2] : null,
                     };
                     tables.Add(t);
                 }

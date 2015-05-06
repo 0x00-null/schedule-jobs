@@ -4,6 +4,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 
 
 namespace MigrateMPData.Test
@@ -88,13 +89,14 @@ namespace MigrateMPData.Test
             sourceDbDataReader.Setup(mocked => mocked.GetValue(0)).Returns("value1");
 
             sourceDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
-            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1 WHERE 1 = 1 EXCEPT SELECT * FROM dest.table1").Verifiable();
+            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1 AS S WHERE 1 = 1 EXCEPT SELECT * FROM dest.table1").Verifiable();
             sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT CONCAT('[', [Column_Name], ']') FROM src.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'table1' ORDER BY ordinal_position").Verifiable();
             sourceDbCommand.Setup(mocked => mocked.Dispose());
 
+            targetDbConnection.SetupGet(mocked => mocked.Database).Returns(targetDbName);
             targetDbConnection.Setup(mocked => mocked.Open());
             targetDbConnection.Setup(mocked => mocked.Close());
-            targetDbConnection.Setup(mocked => mocked.CreateCommand()).Returns(new Queue<IDbCommand>(new [] {targetDbCommand.Object, targetDbCommand.Object, targetDbCommand.Object}).Dequeue);
+            targetDbConnection.Setup(mocked => mocked.CreateCommand()).Returns(targetDbCommand.Object);
             targetDbConnection.Setup(mocked => mocked.BeginTransaction(IsolationLevel.ReadUncommitted)).Returns(dbTransaction.Object);
             targetDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
             targetDbCommand.SetupGet(mocked => mocked.CommandText).Returns("");
@@ -117,6 +119,8 @@ namespace MigrateMPData.Test
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "INSERT INTO dest.table1 (column_name) VALUES (@column_name) ").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 ON").Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 OFF").Verifiable();
+            targetDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT COUNT(*) FROM dest.sys.columns WHERE IS_IDENTITY = 1 AND OBJECT_NAME(object_id) = 'table1'").Verifiable();
+            targetDbCommand.Setup(mocked => mocked.ExecuteScalar()).Returns(1);
             targetDbCommand.Setup(mocked => mocked.ExecuteNonQuery()).Returns(1);
             dbTransaction.Setup(mocked => mocked.Commit());
 
@@ -158,10 +162,11 @@ namespace MigrateMPData.Test
             sourceDbDataReader.Setup(mocked => mocked.GetValue(0)).Returns("value1");
 
             sourceDbCommand.SetupSet(mocked => mocked.CommandType = CommandType.Text).Verifiable();
-            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1  EXCEPT SELECT * FROM dest.table1").Verifiable();
+            sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT column_name FROM src.table1 AS S  EXCEPT SELECT * FROM dest.table1").Verifiable();
             sourceDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT CONCAT('[', [Column_Name], ']') FROM src.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'table1' ORDER BY ordinal_position").Verifiable();
             sourceDbCommand.Setup(mocked => mocked.Dispose());
 
+            targetDbConnection.SetupGet(mocked => mocked.Database).Returns(targetDbName);
             targetDbConnection.Setup(mocked => mocked.Open());
             targetDbConnection.Setup(mocked => mocked.Close());
             targetDbConnection.Setup(mocked => mocked.CreateCommand()).Returns(new Queue<IDbCommand>(new[] { targetDbCommand.Object, targetDbCommand.Object, targetDbCommand.Object }).Dequeue);
@@ -185,8 +190,8 @@ namespace MigrateMPData.Test
 
             targetDbCommand.SetupSet(mocked => mocked.Transaction = dbTransaction.Object).Verifiable();
             targetDbCommand.SetupSet(mocked => mocked.CommandText = "INSERT INTO dest.table1 (column_name) VALUES (@column_name) ").Verifiable();
-            targetDbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 ON").Verifiable();
-            targetDbCommand.SetupSet(mocked => mocked.CommandText = "SET IDENTITY_INSERT dest.table1 OFF").Verifiable();
+            targetDbCommand.SetupSet(mocked => mocked.CommandText = "SELECT COUNT(*) FROM dest.sys.columns WHERE IS_IDENTITY = 1 AND OBJECT_NAME(object_id) = 'table1'").Verifiable();
+            targetDbCommand.Setup(mocked => mocked.ExecuteScalar()).Returns(0);
             targetDbCommand.Setup(mocked => mocked.ExecuteNonQuery()).Throws(dbException.Object);
             dbTransaction.Setup(mocked => mocked.Rollback());
 
@@ -200,10 +205,11 @@ namespace MigrateMPData.Test
             }
 
             sourceDbConnection.VerifyAll();
-            targetDbCommand.Verify(mocked => mocked.ExecuteNonQuery(), Times.Exactly(3));
+            targetDbCommand.Verify(mocked => mocked.ExecuteNonQuery(), Times.Exactly(1));
             sourceDbCommand.VerifyAll();
             dbTransaction.VerifyAll();
             sourceDbDataReader.VerifyAll();
         }
+
     }
 }
