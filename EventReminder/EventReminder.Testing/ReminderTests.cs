@@ -1,6 +1,5 @@
-﻿using EventReminder.Models;
+﻿using System;
 using EventReminder.Services;
-using EventReminder.Utils;
 using NUnit.Framework;
 
 namespace EventReminder.Testing
@@ -13,7 +12,9 @@ namespace EventReminder.Testing
         [SetUp]
         public void Setup()
         {
-            _token = AuthenticationService.Authenticate("register-api-user".StringSetting(), "register-api-password".StringSetting());
+            var uid = Environment.GetEnvironmentVariable("API_USER");
+            var pwd = Environment.GetEnvironmentVariable("API_PASSWORD");
+            _token = AuthenticationService.Authenticate(uid, pwd);
         }
 
         [Test]
@@ -48,29 +49,5 @@ namespace EventReminder.Testing
             var events = EventService.EventsReadyForReminder(_token);
             Assert.IsNotNull(events);
         }
-
-        [Test]
-        [Ignore]
-        //Only used for development testing. Not needed in automated testing.
-        public void SendCommunicationRest()
-        {
-            //Change this!
-            var token = AuthenticationService.Authenticate("tmaddox@aol.com", "crds1234");
-            var communication = new Communication
-            {
-                AuthorUserId = 5,
-                DomainId = 1,
-                EmailSubject = "test message",
-                EmailBody = "test message",
-                FromEmailAddress = "andrew.canterbury@ingagepartners.com",
-                FromContactId = 768379,
-                ReplyContactId = 768379,
-                ReplyToEmailAddress = "andrew.canterbury@ingagepartners.com",
-                ToContactId = 1668084,
-                ToEmailAddress = "andrew.canterbury@ingagepartners.com",
-            };
-            CommunicationService.SendMessage(communication, token);
-        }
-
     }
 }
