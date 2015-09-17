@@ -1,2 +1,3 @@
 # Run nightly to call endpoint to remove expired corkboard posts from Amazon search index
-Invoke-WebRequest -Uri http://localhost:65341/api/syncposts/ -Method POST
+$apiPrefix = [environment]::GetEnvironmentVariable("CRDS_CORKBOARD_API_ENDPOINT", "Machine")
+Invoke-WebRequest -Uri ($apiPrefix + "api/syncposts") -Method POST
