@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Security.Cryptography;
 using NUnit.Framework;
 using LoadProjectData;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.RefAndLookup;
 
 namespace UnitTestProject1
 {
@@ -25,7 +26,7 @@ namespace UnitTestProject1
             var dao = new CrProjectDao();
             var proj = new CrProject
             {
-                ProjectName = "Build Matts Barn",
+                ProjectName = "Build Something New",
                 LocationName = "Oakley",
                 OrganizationName = "Crossroads",
                 ProjectTypeName = "Painting",
@@ -36,6 +37,17 @@ namespace UnitTestProject1
                 MaxVol = 5,
                 AbsoluteMaxVol = 7
             };
+            proj.CheckInFloor = "1";
+            proj.CheckInRoomNumber = "200";
+            proj.CheckInArea = "Front of the room";
+            proj.ParkingLocation = "Down the road";
+            proj.Note1 = "note number 1";
+            proj.Note2 = "another note";
+
+            proj.Address1 = "123 Main St";
+            proj.City = "Walton";
+            proj.State = "KY";
+            proj.Zip = "12345";
 
 
             var rc =dao.Insert(proj);
@@ -65,7 +77,17 @@ namespace UnitTestProject1
                 ProjectStatusId = 1,
                 MinVol = 2,
                 MaxVol = 5,
-                AbsoluteMaxVol = 1000
+                AbsoluteMaxVol = 1000,
+                CheckInFloor = "1",
+                CheckInRoomNumber = "999",
+                CheckInArea = "Arg",
+                Note1 = " Note 1",
+                Note2 = "Note 2222",
+                ParkingLocation = "Park Loc",
+                Address1 = "123 Main St.",
+                City = "Walton",
+                State = "KY",
+                Zip = "90210"
             };
 
 
@@ -137,6 +159,33 @@ namespace UnitTestProject1
             var rc = dao.Insert(groupconnectorregistration);
             Assert.IsTrue(rc > 0);
 
+        }
+
+        [Test]
+        public void Test_Insert_Address()
+        {
+            var addrDao = new CrAddressDao();
+            
+            var addr = new CrAddress
+            {
+                AddressLine1 = "13010 Farmview Dr",
+                City = "Independence",
+                State = "KY",
+                PostalCode = "41051"
+            };
+
+            var rc = addrDao.Insert(addr);
+            Assert.IsTrue(rc > 0);
+
+        }
+
+        [Test]
+        public void Test_Get_AddressId()
+        {
+            var dao = new CrProjectDao();
+
+            var rc = dao.GetProjectAddressId("Build Matts Barn");
+            Assert.IsFalse(rc > 1);
         }
     }
 }
