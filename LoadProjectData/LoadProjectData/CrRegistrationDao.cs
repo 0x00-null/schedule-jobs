@@ -50,7 +50,7 @@ namespace LoadProjectData
                 return (GetRegistrationId(registration.ParticipantId));
             }
             var rc = -1;
-            const string query = "INSERT INTO dbo.cr_Registrations (Organization_ID,Preferred_Launch_Site_ID,Participant_ID,Initiative_ID,Spouse_Participation,Domain_ID, Additional_Information,_Registration_Creation_Date) " +
+            const string query = "INSERT INTO dbo.cr_Registrations (Organization_ID,Preferred_Launch_Site_ID,Participant_ID,Initiative_ID,Spouse_Participation,Domain_ID, Additional_Information,Registration_Creation_Date) " +
                                  "OUTPUT INSERTED.Registration_ID " +
                                  "VALUES (@OrganizationID,@PreferredLaunchSiteID,@ParticipantID,@InitiativeID,@SpouseParticipation,@DomainID, @AddlInfo, @CreationDate) ";
 
