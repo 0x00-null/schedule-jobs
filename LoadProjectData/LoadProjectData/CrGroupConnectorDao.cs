@@ -14,7 +14,7 @@ namespace LoadProjectData
         public bool Exists(int primaryreg, int projectid)
         {
             var count = 0;
-            const string query = "SELECT count(*) FROM dbo.cr_GroupConnectors WHERE Primary_Registration = @PrimReg and project_id = @ProjectId";
+            const string query = "SELECT count(*) FROM dbo.cr_Group_Connectors WHERE Primary_Registration = @PrimReg and project_id = @ProjectId";
 
             using (var cn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, cn))
@@ -49,8 +49,8 @@ namespace LoadProjectData
             }
 
             var rc = -1;
-            const string query = "INSERT INTO dbo.cr_GroupConnectors (Project_ID,Primary_Registration,Domain_ID) " +
-                                 "OUTPUT INSERTED.GroupConnector_ID " +
+            const string query = "INSERT INTO dbo.cr_Group_Connectors (Project_ID,Primary_Registration,Domain_ID) " +
+                                 "OUTPUT INSERTED.Group_Connector_ID " +
                                  "VALUES (@ProjectID,@PrimaryRegistration,@DomainID) ";
 
             using (var cn = new SqlConnection(_connectionString))
@@ -81,7 +81,7 @@ namespace LoadProjectData
         {
             var rc = -1;
 
-            const string query = "SELECT groupconnector_id FROM dbo.cr_GroupConnectors WHERE Primary_Registration = @PrimReg and project_id = @ProjectId";
+            const string query = "SELECT group_connector_id FROM dbo.cr_Group_Connectors WHERE Primary_Registration = @PrimReg and project_id = @ProjectId";
 
             using (var cn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, cn))

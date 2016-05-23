@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrAddress.cs" />
+    <Compile Include="CrAddressDao.cs" />
     <Compile Include="ContactsDao.cs" />
     <Compile Include="CrGroupConnector.cs" />
     <Compile Include="CrGroupConnectorDao.cs" />
