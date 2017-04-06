@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 
@@ -15,12 +10,10 @@ namespace LoadProjectData
 
         public string GetContactNameFromParticipantId(int participantid)
         {
-            var rc = "";
+            string rc;
 
             const string query = "SELECT c.nickname, c.last_name from contacts c join participants p on p.contact_id = c.contact_id " +
                                  "where p.participant_id = @Participant_Id";
-
-            var mp = new MpDao();
 
             using (var cn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, cn))
