@@ -11,16 +11,17 @@ namespace LoadProjectData
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public bool Exists(string projectName)
+        public bool Exists(string projectName, int initiativeId)
         {
             var count = 0;
-            const string query = "SELECT count(*) FROM dbo.cr_Projects WHERE project_name = @ProjectName";
+            const string query = "SELECT count(*) FROM dbo.cr_Projects WHERE project_name = @ProjectName AND Initiative_ID = @InitiativeId";
 
             using (var cn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, cn))
             {
 
                 cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 100).Value = projectName;
+                cmd.Parameters.Add("@InitiativeId", SqlDbType.Int).Value = initiativeId;
 
                 // open connection, execute INSERT, close connection
                 cn.Open();
@@ -40,11 +41,14 @@ namespace LoadProjectData
             return rc;
         }
 
-        public int Insert(CrProject project)
+        public int Insert(CrProject project, bool update = false)
         {
-            if (Exists(project.ProjectName))
+            if (Exists(project.ProjectName, project.InitiativeId))
             {
-                Update(project);
+                if (update)
+                {
+                    Update(project);
+                }
                 return GetProjectId(project.ProjectName);
             }
 
@@ -166,7 +170,7 @@ namespace LoadProjectData
                 cmd.Parameters.Add("@LocationID", SqlDbType.Int).Value = mp.GetLocationId(project.LocationName);
                 cmd.Parameters.Add("@ProjectTypeID", SqlDbType.Int).Value = mp.GetProjectTypeId(project.ProjectTypeName);
                 cmd.Parameters.Add("@OrganizationID", SqlDbType.Int).Value = mp.GetOrganizationId(project.OrganizationName);
-                cmd.Parameters.Add("@InitiativeID", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@InitiativeID", SqlDbType.Int).Value = project.InitiativeId;
                 cmd.Parameters.Add("@MinimumVolunteers", SqlDbType.Int).Value = project.MinVol;
                 cmd.Parameters.Add("@MaximumVolunteers", SqlDbType.Int).Value = project.MaxVol;
                 cmd.Parameters.Add("@AbsoluteMaximumVolunteers", SqlDbType.Int).Value = project.AbsoluteMaxVol;

@@ -55,7 +55,7 @@ namespace LoadProjectData
                 {
                     _initiative = int.Parse(arg.Substring(arg.IndexOf(':') + 1));
                 }
-                if (arg.ToUpper().StartsWith("-U"))
+                else if (arg.ToUpper().StartsWith("-U"))
                 {
                     _updatePass = true;
                 }
@@ -101,7 +101,7 @@ namespace LoadProjectData
             ExcelWorksheet workSheet = package.Workbook.Worksheets.First();
 
            // loop over each row
-            for (var row = workSheet.Dimension.Start.Row; row <= workSheet.Dimension.End.Row; row++)
+            for (var row = workSheet.Dimension.Start.Row + 1; row <= workSheet.Dimension.End.Row; row++)
             {
                 //create project with info from the sheet
                 var p = new CrProject
