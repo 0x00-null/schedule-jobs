@@ -144,7 +144,7 @@ namespace LoadProjectData
                         var reg = new CrRegistration
                         {
                             ParticipantId = participantid,
-                            AddlInfo = "Created By GO Cincy Import App",
+                            AddlInfo = "Created By GO Local Import App",
                             CreationDate = DateTime.Now,
                             DomainId = 1,
                             InitiativeId = _initiative,
