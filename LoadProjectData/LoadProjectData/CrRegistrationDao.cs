@@ -11,11 +11,11 @@ namespace LoadProjectData
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         
-        public bool Exists(int participantid)
+        public bool Exists(int participantid, int initiativeId)
         {
             var rc = false;
             var count = 0;
-            const string query = "SELECT count(*) FROM dbo.cr_Registrations WHERE participant_id = @ParticipantId";
+            const string query = "SELECT count(*) FROM dbo.cr_Registrations WHERE participant_id = @ParticipantId AND Initiative_ID = @InitiativeId";
 
             var mp = new MpDao();
 
@@ -24,6 +24,7 @@ namespace LoadProjectData
             {
 
                 cmd.Parameters.Add("@ParticipantId", SqlDbType.NVarChar, 100).Value = participantid;
+                cmd.Parameters.Add("@InitiativeId", SqlDbType.Int).Value = initiativeId;
 
                 // open connection, execute INSERT, close connection
                 cn.Open();
@@ -45,9 +46,9 @@ namespace LoadProjectData
 
         public int Insert(CrRegistration registration)
         {
-            if (Exists(registration.ParticipantId))
+            if (Exists(registration.ParticipantId, registration.InitiativeId))
             {
-                return (GetRegistrationId(registration.ParticipantId));
+                return (GetRegistrationId(registration.ParticipantId, registration.InitiativeId));
             }
             var rc = -1;
             const string query = "INSERT INTO dbo.cr_Registrations (Organization_ID,Preferred_Launch_Site_ID,Participant_ID,Initiative_ID,Spouse_Participation,Domain_ID, Additional_Information,_Registration_Creation_Date) " +
@@ -85,19 +86,18 @@ namespace LoadProjectData
             return rc;
         }
 
-        public int GetRegistrationId(int participantid)
+        public int GetRegistrationId(int participantid, int initiativeId)
         {
             var rc = -1;
 
-            const string query = "SELECT registration_ID FROM dbo.cr_Registrations WHERE participant_id = @ParticipantID";
-
-            var mp = new MpDao();
+            const string query = "SELECT registration_ID FROM dbo.cr_Registrations WHERE participant_id = @ParticipantID AND Initiative_ID = @InitiativeId";
 
             using (var cn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, cn))
             {
 
                 cmd.Parameters.Add("@ParticipantID", SqlDbType.NVarChar, 100).Value = participantid;
+                cmd.Parameters.Add("@InitiativeId", SqlDbType.Int).Value = initiativeId;
 
                 // open connection, execute INSERT, close connection
                 cn.Open();

@@ -11,17 +11,17 @@ namespace LoadProjectData
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public bool Exists(string projectName)
+        public bool Exists(string projectName, int initiativeId)
         {
-            var rc = false;
             var count = 0;
-            const string query = "SELECT count(*) FROM dbo.cr_Projects WHERE project_name = @ProjectName";
+            const string query = "SELECT count(*) FROM dbo.cr_Projects WHERE project_name = @ProjectName AND Initiative_ID = @InitiativeId";
 
             using (var cn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, cn))
             {
 
                 cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 100).Value = projectName;
+                cmd.Parameters.Add("@InitiativeId", SqlDbType.Int).Value = initiativeId;
 
                 // open connection, execute INSERT, close connection
                 cn.Open();
@@ -37,20 +37,20 @@ namespace LoadProjectData
 
                 cn.Close();
             }
-            rc = count > 0 ? true : false;
+            var rc = count > 0;
             return rc;
         }
 
-        public int Insert(CrProject project)
+        public int Insert(CrProject project, bool update = false)
         {
-            if (Exists(project.ProjectName))
+            if (Exists(project.ProjectName, project.InitiativeId))
             {
-                Update(project);
+                if (update)
+                {
+                    Update(project);
+                }
                 return GetProjectId(project.ProjectName);
             }
-
-            // only update - new cr_project fields to populate
-            return -1;
 
             var addrDao = new CrAddressDao();
             var addr = new CrAddress
@@ -88,7 +88,7 @@ namespace LoadProjectData
                 cmd.Parameters.Add("@LocationID", SqlDbType.Int).Value = mp.GetLocationId(project.LocationName);
                 cmd.Parameters.Add("@ProjectTypeID", SqlDbType.Int).Value = mp.GetProjectTypeId(project.ProjectTypeName);
                 cmd.Parameters.Add("@OrganizationID", SqlDbType.Int).Value = mp.GetOrganizationId(project.OrganizationName);
-                cmd.Parameters.Add("@InitiativeID", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@InitiativeID", SqlDbType.Int).Value = project.InitiativeId;
                 cmd.Parameters.Add("@MinimumVolunteers", SqlDbType.Int).Value = project.MinVol;
                 cmd.Parameters.Add("@MaximumVolunteers", SqlDbType.Int).Value = project.MaxVol;
                 cmd.Parameters.Add("@AbsoluteMaximumVolunteers", SqlDbType.Int).Value = project.AbsoluteMaxVol;
@@ -125,38 +125,39 @@ namespace LoadProjectData
             if (addrId < 0)
             {
                 var addrDao = new CrAddressDao();
-                var addr = new CrAddress();
-                addr.AddressLine1 = project.Address1;
-                addr.City = project.City;
-                addr.State = project.State;
-                addr.PostalCode = project.Zip;
+                var addr = new CrAddress
+                {
+                    AddressLine1 = project.Address1,
+                    City = project.City,
+                    State = project.State,
+                    PostalCode = project.Zip
+                };
                 addrId = addrDao.Insert(addr);
             }
 
             var rc = -1;
-            //const string query = "UPDATE dbo.cr_Projects SET " +
-            //                     "Project_Status_ID = @ProjectStatusID ," +
-            //                     "Location_ID = @LocationID ," +
-            //                     "Project_Type_ID = @ProjectTypeID," +
-            //                     "Organization_ID = @OrganizationID," +
-            //                     "Initiative_ID=@InitiativeID," +
-            //                     "Minimum_Volunteers = @MinimumVolunteers," +
-            //                     "Maximum_Volunteers = @MaximumVolunteers," +
-            //                     "Absolute_Maximum_Volunteers = @AbsoluteMaximumVolunteers," +
-            //                     "Domain_ID = @DomainID, " +
-            //                     "Check_In_Floor = @CheckInFloor, " +
-            //                     "Check_In_Area = @CheckInArea, " +
-            //                     "Check_In_Room_Number = @CheckInRoomNumber, " +
-            //                     "Note_To_Volunteers_1 = @NoteToVolunteers1, " +
-            //                     "Note_To_Volunteers_2 = @NoteToVolunteers2, " +
-            //                     "Project_Parking_Location = @ProjectParkingLocation, " +
-            //                     "Address_ID = @AddressID " +
-            //                     "WHERE Project_Name = @ProjectName";
-
             const string query = "UPDATE dbo.cr_Projects SET " +
-                                 "Project_Parking_Location = @ProjectParkingLocation " +
+                                 "Project_Status_ID = @ProjectStatusID ," +
+                                 "Location_ID = @LocationID ," +
+                                 "Project_Type_ID = @ProjectTypeID," +
+                                 "Organization_ID = @OrganizationID," +
+                                 "Initiative_ID=@InitiativeID," +
+                                 "Minimum_Volunteers = @MinimumVolunteers," +
+                                 "Maximum_Volunteers = @MaximumVolunteers," +
+                                 "Absolute_Maximum_Volunteers = @AbsoluteMaximumVolunteers," +
+                                 "Domain_ID = @DomainID, " +
+                                 "Check_In_Floor = @CheckInFloor, " +
+                                 "Check_In_Area = @CheckInArea, " +
+                                 "Check_In_Room_Number = @CheckInRoomNumber, " +
+                                 "Note_To_Volunteers_1 = @NoteToVolunteers1, " +
+                                 "Note_To_Volunteers_2 = @NoteToVolunteers2, " +
+                                 "Project_Parking_Location = @ProjectParkingLocation, " +
+                                 "Address_ID = @AddressID " +
                                  "WHERE Project_Name = @ProjectName";
 
+            //const string query = "UPDATE dbo.cr_Projects SET " +
+            //                     "Project_Parking_Location = @ProjectParkingLocation " +
+            //                     "WHERE Project_Name = @ProjectName";
 
             var mp = new MpDao();
 
@@ -165,15 +166,15 @@ namespace LoadProjectData
             {
 
                 cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 100).Value = project.ProjectName;
-                //cmd.Parameters.Add("@ProjectStatusID", SqlDbType.Int).Value = 1;
-                //cmd.Parameters.Add("@LocationID", SqlDbType.Int).Value = mp.GetLocationId(project.LocationName);
-                //cmd.Parameters.Add("@ProjectTypeID", SqlDbType.Int).Value = mp.GetProjectTypeId(project.ProjectTypeName);
-                //cmd.Parameters.Add("@OrganizationID", SqlDbType.Int).Value = mp.GetOrganizationId(project.OrganizationName);
-                //cmd.Parameters.Add("@InitiativeID", SqlDbType.Int).Value = 1;
-                //cmd.Parameters.Add("@MinimumVolunteers", SqlDbType.Int).Value = project.MinVol;
-                //cmd.Parameters.Add("@MaximumVolunteers", SqlDbType.Int).Value = project.MaxVol;
-                //cmd.Parameters.Add("@AbsoluteMaximumVolunteers", SqlDbType.Int).Value = project.AbsoluteMaxVol;
-                //cmd.Parameters.Add("@DomainID", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@ProjectStatusID", SqlDbType.Int).Value = 1;
+                cmd.Parameters.Add("@LocationID", SqlDbType.Int).Value = mp.GetLocationId(project.LocationName);
+                cmd.Parameters.Add("@ProjectTypeID", SqlDbType.Int).Value = mp.GetProjectTypeId(project.ProjectTypeName);
+                cmd.Parameters.Add("@OrganizationID", SqlDbType.Int).Value = mp.GetOrganizationId(project.OrganizationName);
+                cmd.Parameters.Add("@InitiativeID", SqlDbType.Int).Value = project.InitiativeId;
+                cmd.Parameters.Add("@MinimumVolunteers", SqlDbType.Int).Value = project.MinVol;
+                cmd.Parameters.Add("@MaximumVolunteers", SqlDbType.Int).Value = project.MaxVol;
+                cmd.Parameters.Add("@AbsoluteMaximumVolunteers", SqlDbType.Int).Value = project.AbsoluteMaxVol;
+                cmd.Parameters.Add("@DomainID", SqlDbType.Int).Value = 1;
                 cmd.Parameters.Add("@CheckInFloor", SqlDbType.NVarChar, 50).Value = project.CheckInFloor;
                 cmd.Parameters.Add("@CheckInArea", SqlDbType.NVarChar, 50).Value = project.CheckInArea;
                 cmd.Parameters.Add("@CheckInRoomNumber", SqlDbType.NVarChar, 50).Value = project.CheckInRoomNumber;
