@@ -137,44 +137,19 @@ namespace LoadProjectData
 
             var rc = -1;
             const string query = "UPDATE dbo.cr_Projects SET " +
-                                 "Project_Status_ID = @ProjectStatusID ," +
-                                 "Location_ID = @LocationID ," +
-                                 "Project_Type_ID = @ProjectTypeID," +
-                                 "Organization_ID = @OrganizationID," +
-                                 "Initiative_ID=@InitiativeID," +
-                                 "Minimum_Volunteers = @MinimumVolunteers," +
-                                 "Maximum_Volunteers = @MaximumVolunteers," +
-                                 "Absolute_Maximum_Volunteers = @AbsoluteMaximumVolunteers," +
-                                 "Domain_ID = @DomainID, " +
                                  "Check_In_Floor = @CheckInFloor, " +
                                  "Check_In_Area = @CheckInArea, " +
                                  "Check_In_Room_Number = @CheckInRoomNumber, " +
                                  "Note_To_Volunteers_1 = @NoteToVolunteers1, " +
                                  "Note_To_Volunteers_2 = @NoteToVolunteers2, " +
                                  "Project_Parking_Location = @ProjectParkingLocation, " +
-                                 "Address_ID = @AddressID " +
                                  "WHERE Project_Name = @ProjectName";
-
-            //const string query = "UPDATE dbo.cr_Projects SET " +
-            //                     "Project_Parking_Location = @ProjectParkingLocation " +
-            //                     "WHERE Project_Name = @ProjectName";
-
-            var mp = new MpDao();
 
             using (var cn = new SqlConnection(_connectionString))
             using (var cmd = new SqlCommand(query, cn))
             {
 
                 cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 100).Value = project.ProjectName;
-                cmd.Parameters.Add("@ProjectStatusID", SqlDbType.Int).Value = 1;
-                cmd.Parameters.Add("@LocationID", SqlDbType.Int).Value = mp.GetLocationId(project.LocationName);
-                cmd.Parameters.Add("@ProjectTypeID", SqlDbType.Int).Value = mp.GetProjectTypeId(project.ProjectTypeName);
-                cmd.Parameters.Add("@OrganizationID", SqlDbType.Int).Value = mp.GetOrganizationId(project.OrganizationName);
-                cmd.Parameters.Add("@InitiativeID", SqlDbType.Int).Value = project.InitiativeId;
-                cmd.Parameters.Add("@MinimumVolunteers", SqlDbType.Int).Value = project.MinVol;
-                cmd.Parameters.Add("@MaximumVolunteers", SqlDbType.Int).Value = project.MaxVol;
-                cmd.Parameters.Add("@AbsoluteMaximumVolunteers", SqlDbType.Int).Value = project.AbsoluteMaxVol;
-                cmd.Parameters.Add("@DomainID", SqlDbType.Int).Value = 1;
                 cmd.Parameters.Add("@CheckInFloor", SqlDbType.NVarChar, 50).Value = project.CheckInFloor;
                 cmd.Parameters.Add("@CheckInArea", SqlDbType.NVarChar, 50).Value = project.CheckInArea;
                 cmd.Parameters.Add("@CheckInRoomNumber", SqlDbType.NVarChar, 50).Value = project.CheckInRoomNumber;
@@ -183,7 +158,7 @@ namespace LoadProjectData
                 cmd.Parameters.Add("@ProjectParkingLocation", SqlDbType.NVarChar, 500).Value = project.ParkingLocation;
                 cmd.Parameters.Add("@AddressID", SqlDbType.Int).Value = addrId;
                 
-                // open connection, execute INSERT, close connection
+                // open connection, execute UPDATE, close connection
                 cn.Open();
                 try
                 {
