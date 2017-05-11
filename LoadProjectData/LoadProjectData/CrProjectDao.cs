@@ -121,28 +121,11 @@ namespace LoadProjectData
 
         public int Update(CrProject project)
         {
-            var addrId = GetProjectAddressId(project.ProjectName);
-            if (addrId < 0)
-            {
-                var addrDao = new CrAddressDao();
-                var addr = new CrAddress
-                {
-                    AddressLine1 = project.Address1,
-                    City = project.City,
-                    State = project.State,
-                    PostalCode = project.Zip
-                };
-                addrId = addrDao.Insert(addr);
-            }
-
             var rc = -1;
             const string query = "UPDATE dbo.cr_Projects SET " +
-                                 "Check_In_Floor = @CheckInFloor, " +
-                                 "Check_In_Area = @CheckInArea, " +
                                  "Check_In_Room_Number = @CheckInRoomNumber, " +
                                  "Note_To_Volunteers_1 = @NoteToVolunteers1, " +
-                                 "Note_To_Volunteers_2 = @NoteToVolunteers2, " +
-                                 "Project_Parking_Location = @ProjectParkingLocation, " +
+                                 "Project_Parking_Location = @ProjectParkingLocation " +
                                  "WHERE Project_Name = @ProjectName";
 
             using (var cn = new SqlConnection(_connectionString))
@@ -150,13 +133,9 @@ namespace LoadProjectData
             {
 
                 cmd.Parameters.Add("@ProjectName", SqlDbType.NVarChar, 100).Value = project.ProjectName;
-                cmd.Parameters.Add("@CheckInFloor", SqlDbType.NVarChar, 50).Value = project.CheckInFloor;
-                cmd.Parameters.Add("@CheckInArea", SqlDbType.NVarChar, 50).Value = project.CheckInArea;
                 cmd.Parameters.Add("@CheckInRoomNumber", SqlDbType.NVarChar, 50).Value = project.CheckInRoomNumber;
                 cmd.Parameters.Add("@NoteToVolunteers1", SqlDbType.NVarChar, 500).Value = project.Note1;
-                cmd.Parameters.Add("@NoteToVolunteers2", SqlDbType.NVarChar, 500).Value = project.Note2;
                 cmd.Parameters.Add("@ProjectParkingLocation", SqlDbType.NVarChar, 500).Value = project.ParkingLocation;
-                cmd.Parameters.Add("@AddressID", SqlDbType.Int).Value = addrId;
                 
                 // open connection, execute UPDATE, close connection
                 cn.Open();
