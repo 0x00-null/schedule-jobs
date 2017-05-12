@@ -22,11 +22,8 @@ namespace LoadProjectData
         private static int _projectzipcol;
 
         //Second Pass Columns
-        private static int _checkinfloorcol;
-        private static int _checkinareacol;
         private static int _checkinroomcol;
         private static int _notetovol1col;
-        private static int _notetovol2col;
         private static int _projectparkingloccol;
 
         private static int _initiative;
@@ -86,11 +83,8 @@ namespace LoadProjectData
             _projectstatecol = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["ProjectStateCol"]);
             _projectzipcol = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["ProjectZipCol"]);
 
-            _checkinfloorcol = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CheckInFloorCol"]);
-            _checkinareacol  = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CheckInAreaCol"]);
             _checkinroomcol = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CheckInRoomCol"]);
             _notetovol1col  = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["NoteToVol1Col"]);
-            _notetovol2col  = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["NoteToVol2Col"]);
             _projectparkingloccol = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["ProjectParkingLocCol"]);
 
             var m = new MpDao();
@@ -115,11 +109,8 @@ namespace LoadProjectData
                     AbsoluteMaxVol = ReadIntFromFile(workSheet, row, _supermaxcol),
                     DomainId = 1,
                     InitiativeId = _initiative,
-                    CheckInFloor = _updatePass ? ReadStringFromFile(workSheet, row, _checkinfloorcol) : "",
-                    CheckInArea = _updatePass ? ReadStringFromFile(workSheet, row, _checkinareacol) : "",
                     CheckInRoomNumber = _updatePass ? ReadStringFromFile(workSheet, row, _checkinroomcol) : "",
                     Note1 = _updatePass ? ReadStringFromFile(workSheet, row, _notetovol1col) : "",
-                    Note2 = _updatePass ? ReadStringFromFile(workSheet, row, _notetovol2col) : "",
                     ParkingLocation = _updatePass ? ReadStringFromFile(workSheet, row, _projectparkingloccol) : "",
                     Address1 = ReadStringFromFile(workSheet, row, _projectaddresscol),
                     City= ReadStringFromFile(workSheet, row, _projectcitycol),
@@ -130,61 +121,63 @@ namespace LoadProjectData
                 Console.WriteLine(row.ToString());
 
                 var projDao = new CrProjectDao();
-                var projectId = projDao.Insert(p);
+                var projectId = projDao.Insert(p, _updatePass);
 
-                //Get a Participant ID for each TC in list
-                var tcEmailList = ReadStringFromFile(workSheet, row, _tcemailscol).Split(',').ToList();
-                foreach (var email in tcEmailList)
+                if (!_updatePass)
                 {
-                    try
+                    //Get a Participant ID for each TC in list
+                    var tcEmailList = ReadStringFromFile(workSheet, row, _tcemailscol).Split(',').ToList();
+                    foreach (var email in tcEmailList)
                     {
-                        var participantid = m.GetParticipantId(email);
-                        //create registration
-                        var regDao = new CrRegistrationDao();
-                        var reg = new CrRegistration
+                        try
                         {
-                            ParticipantId = participantid,
-                            AddlInfo = "Created By GO Local Import App",
-                            CreationDate = DateTime.Now,
-                            DomainId = 1,
-                            InitiativeId = _initiative,
-                            LocationName = p.LocationName,
-                            OrganizationName = p.OrganizationName,
-                            SpouseParticipation = 0
-                        };
-                        var registrationId = regDao.Insert(reg);
+                            var participantid = m.GetParticipantId(email);
+                            //create registration
+                            var regDao = new CrRegistrationDao();
+                            var reg = new CrRegistration
+                            {
+                                ParticipantId = participantid,
+                                AddlInfo = "Created By GO Local Import App",
+                                CreationDate = DateTime.Now,
+                                DomainId = 1,
+                                InitiativeId = _initiative,
+                                LocationName = p.LocationName,
+                                OrganizationName = p.OrganizationName,
+                                SpouseParticipation = 0
+                            };
+                            var registrationId = regDao.Insert(reg);
 
-                        //create GroupConnector
-                        var gc = new CrGroupConnector
+                            //create GroupConnector
+                            var gc = new CrGroupConnector
+                            {
+                                ProjectId = projectId,
+                                DomainId = 1,
+                                PrimaryRegistration = registrationId
+                            };
+                            var gcdao = new CrGroupConnectorDao();
+                            var groupconnectorid = gcdao.Insert(gc);
+
+                            //create GroupConnectorRegistration
+                            var gcr = new CrGroupConnectorRegistration
+                            {
+                                GroupConnectorId = groupconnectorid,
+                                RegistrationId = registrationId,
+                                DomainId = 1,
+                                RoleId = 22
+                            };
+                            var gcregdao = new CrGroupConnectorRegistrationDao();
+                            gcregdao.Insert(gcr);
+
+                        }
+
+
+                        catch
+                            (Exception ex)
                         {
-                            ProjectId = projectId,
-                            DomainId = 1,
-                            PrimaryRegistration = registrationId
-                        };
-                        var gcdao = new CrGroupConnectorDao();
-                        var groupconnectorid = gcdao.Insert(gc);
-
-                        //create GroupConnectorRegistration
-                        var gcr = new CrGroupConnectorRegistration
-                        {
-                            GroupConnectorId = groupconnectorid,
-                            RegistrationId = registrationId,
-                            DomainId = 1,
-                            RoleId = 22
-                        };
-                        var gcregdao = new CrGroupConnectorRegistrationDao();
-                        gcregdao.Insert(gcr);
-
+                            var str = p.ProjectName + ":" + p.LocationName + ":" + email + " not found";
+                            log.Warn(str);
+                        }
                     }
-
-
-                    catch
-                        (Exception ex)
-                    {
-                        var str = p.ProjectName + ":" + p.LocationName + ":" + email + " not found";
-                        log.Warn(str);
-                    }
-
                 }
 
             }
